@@ -16,6 +16,7 @@ public class BigDecimalDemo {
         // if num is null
         Integer num2 = null;
         BigDecimal bd2 = new BigDecimal(num2);// NullPointerException
+        System.out.println("-->" +bd2);
     }
 
 
