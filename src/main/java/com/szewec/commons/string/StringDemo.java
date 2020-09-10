@@ -10,5 +10,18 @@ public class StringDemo {
         String str4 = null;
         System.out.println(StringUtils.equals(str1, str2));
         System.out.println(StringUtils.equals(str3, str4));
+
+
+        /**
+         * 另外一个CASE
+         * 当Integer为null，toString会报错吗？
+         */
+
+        Integer i = new Integer(9);
+        System.out.println(i.toString());
+
+        Integer j = null;
+        System.out.println(j.toString());// Exception in thread "main" java.lang.NullPointerException
+
     }
 }
