@@ -18,7 +18,7 @@ public class StringDemo {
          */
 
         Integer i = new Integer(9);
-        System.out.println(i.toString());
+        System.out.println(i.toString());// 9
 
         Integer j = null;
         System.out.println(j.toString());// Exception in thread "main" java.lang.NullPointerException
