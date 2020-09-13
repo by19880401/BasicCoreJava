@@ -8,8 +8,8 @@ public class StringDemo {
         String str2 = "02";
         String str3 = "";
         String str4 = null;
-        System.out.println(StringUtils.equals(str1, str2));
-        System.out.println(StringUtils.equals(str3, str4));
+        System.out.println(StringUtils.equals(str1, str2));// false
+        System.out.println(StringUtils.equals(str3, str4));// false
 
 
         /**
