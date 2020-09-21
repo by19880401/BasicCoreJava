@@ -17,8 +17,8 @@ public class Main {
 //        a.setPrice(123.9);// true
 //        a.setPrice(123.0);// true
 //        a.setPrice(12.999);// false
-        boolean isApple = validate(a);
-        System.out.println("------------->" + isApple);
+        boolean isValidApple = validate(a);
+        System.out.println("------------->" + isValidApple);
     }
 
     public static <T> boolean validate(T object) {
