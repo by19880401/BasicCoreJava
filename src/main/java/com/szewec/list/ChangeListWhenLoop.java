@@ -3,16 +3,24 @@ package com.szewec.list;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+/**
+ * 下面这样的改动是不会报错的，正常行为：
+ * 有一个实体，在遍历时根本实体内的某一个或两属性判断来修改剩余的其它属性，此时的遍历修改不会报错
+ */
 public class ChangeListWhenLoop {
 
     public static void main(String[] args) {
-        List<Person> initList = initializingList();
-        printPersonInfo(initList);
+        List<Person> personList = initializingList();
+        printPersonInfo(personList);
+        /**Result:
+         * Person{Id=0, name='Potter G0', sex='null'}
+         * Person{Id=1, name='Potter G1', sex='null'}
+         */
         // 尝试修改其中一条记录的属性值
-        for (Person p : initList) {
+        for (Person p : personList) {
+            // 如果persion的id相同，则修改它的sex属性
             if (1 == p.getId().intValue()) {
                 p.setSex("man");
             } else {
@@ -20,10 +28,15 @@ public class ChangeListWhenLoop {
             }
         }
 
-        printPersonInfo(initList);
+        printPersonInfo(personList);
+        /**Result:
+         * Person{Id=0, name='Potter G0', sex='woman'}
+         * Person{Id=1, name='Potter G1', sex='man'}
+         */
 
 
-        Iterator<Person> it = initList.iterator();
+        // 使用迭代器遍历删除元素
+        /*Iterator<Person> it = initList.iterator();
         while (it.hasNext()) {
             Person p = it.next();
             if (0 == p.getId()) {
@@ -31,7 +44,7 @@ public class ChangeListWhenLoop {
             }
         }
 
-        printPersonInfo(initList);
+        printPersonInfo(initList);*/
 
     }
 
