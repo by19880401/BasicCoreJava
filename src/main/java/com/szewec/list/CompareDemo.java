@@ -31,7 +31,7 @@ public class CompareDemo {
 
     private static void printInfo(List<String> list) {
         if (CollectionUtils.isEmpty(list)) {
-            System.out.println("it's emtpy");
+            System.out.println("it's empty");
             return;
         }
         for (String s : list) {

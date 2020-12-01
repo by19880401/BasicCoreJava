@@ -13,9 +13,9 @@ public class PutValue2Map {
         // 初始化
         List<String> pList = getParentList();
         List<Food> cList = getChildList();
-        printInfo(pList);
-        printInfo(cList);
-        printInfo(null, true);
+//        printInfo(pList);
+//        printInfo(cList);
+//        printInfo(null, true);
         Map<String, List<Food>> map = new HashMap<>();
         for (String key : pList) {
             for (Food food : cList) {
@@ -39,6 +39,20 @@ public class PutValue2Map {
         }
         pList = resultList;
         printInfo(pList);
+
+
+
+        /**测试printInfo打印line的情形**/
+        // 当list为空或null，isNeedLine为true
+//        printInfo(null,true);// pass，打印list为空，打印星标line
+        // 当list为空或null，isNeedLine为false
+//        printInfo(new ArrayList<>(),false);// pass,打印list为空，不打印星标line
+        // 当line不为空或null，isNeedLine为true
+//        List<String> listNotNull = getParentList();
+//        printInfo(listNotNull,true);// pass，打印list，打印星标line
+        // 当line不为空或null，isNeedLine为false
+//        printInfo(listNotNull,false);// pass，打印list，不打印星标line
+
     }
 
 
@@ -65,13 +79,17 @@ public class PutValue2Map {
         printInfo(list, false);
     }
 
+    /**
+     * 当isNeedLine为false时，
+     * @param list
+     * @param isNeedLine
+     */
     private static void printInfo(List<?> list, boolean isNeedLine) {
+        if (isNeedLine) {
+            System.out.println("*******************");
+        }
         if (CollectionUtils.isEmpty(list)) {
-            if (isNeedLine) {
-                System.out.println("*******************");
-            } else {
-                System.out.println("list为空");
-            }
+            System.out.println("list为空");
             return;
         }
         for (Object t : list) {
