@@ -9,12 +9,10 @@ public class SplitBeforeDemo {
         String str1 = "1,2,3,4,5,,,,";//1,2,3,4,5
         String str2 = "1,2,3,,,4,5,,,,";//1,2,3,4,5
 
-        String result = StringUtils.substringBeforeLast(str2, ",");
+//        String result = StringUtils.substringBeforeLast(str2, ",");
 //        System.out.println(handleStr(result,","));
 
-        System.out.println(anotherWayToHandleStr(str0,","));
         System.out.println(anotherWayToHandleStr(str1,","));
-        System.out.println(anotherWayToHandleStr(str2,","));
     }
 
     /**
@@ -40,6 +38,12 @@ public class SplitBeforeDemo {
         return StringUtils.substringBeforeLast(sb.toString(), splitStr);
     }
 
+    /**
+     *
+     * @param str is 1,2,3,4,5,,,,
+     * @param splitStr
+     * @return
+     */
     public static String anotherWayToHandleStr(String str, String splitStr) {
         if (StringUtils.isBlank(str)) {
             return "";
