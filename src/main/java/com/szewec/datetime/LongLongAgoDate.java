@@ -13,6 +13,10 @@ public class LongLongAgoDate {
         System.out.println("------------>" + date2);//Fri Apr 01 13:37:28 CST 1988
     }
 
+    /**
+     * 获取指定年月日的某一日期（返回date），如下指定1988-04-01
+     * @return
+     */
     public static Date getLongLongAgoDate() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
@@ -24,6 +28,10 @@ public class LongLongAgoDate {
         return date;
     }
 
+    /**
+     * （推荐）获取指定年月日的某一日期（返回date），如下指定1988-04-01
+     * @return
+     */
     // suggest way
     // month:0 ~11表示12个月
     public static Date getLongLongAgoDate2() {

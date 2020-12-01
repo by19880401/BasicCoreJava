@@ -21,6 +21,12 @@ public class Main {
         System.out.println("------------->" + isValidApple);
     }
 
+    /**
+     * 用于校验对象的price属性精确度，3位整数，2位小数
+     * @param object
+     * @param <T>
+     * @return
+     */
     public static <T> boolean validate(T object) {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<T>> cons = validator.validate(object);
