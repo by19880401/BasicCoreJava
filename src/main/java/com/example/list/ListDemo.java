@@ -29,4 +29,5 @@ public class ListDemo {
         System.out.println(str1);// 结果：willis0,willis1,willis2,willis3,willis4
         System.out.println(str2);// 结果：0|1|2|3|4
     }
+
 }

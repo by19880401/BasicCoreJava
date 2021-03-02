@@ -1,8 +1,23 @@
 package com.example.list;
 
 public class Person {
+    private Integer id;
     private String name;
     private String age;
+
+    public Person(Integer id, String name, String age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -23,8 +38,9 @@ public class Person {
     @Override
     public String toString() {
         return "Person{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age='" + age + '\'' +
                 '}';
     }
 }
