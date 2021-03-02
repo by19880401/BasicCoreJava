@@ -5,6 +5,9 @@ public class Person {
     private String name;
     private String age;
 
+    public Person() {
+    }
+
     public Person(Integer id, String name, String age) {
         this.id = id;
         this.name = name;
