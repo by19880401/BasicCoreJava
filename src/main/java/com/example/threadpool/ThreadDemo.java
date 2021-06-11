@@ -9,24 +9,24 @@ import java.util.UUID;
 public class ThreadDemo {
     public static void main(String[] args) {
 
-        for (int i = 0; i < 10; i++) {//此处理模块页面点击，假如页面连续点击10次，便会迅速创建出10个线程
+        for (int i = 0; i < 10; i++) {// 此处理模块页面点击，假如页面连续点击10次，便会迅速创建出10个线程
             System.out.println("crate the new thread, No." + i + "time......");
             new Thread(() -> {
                 // demo
-                String contractId = UUID.randomUUID().toString() ;//10个线程，每个都会创建1个UUID
-                System.out.println("*******************创建UUID：" +contractId);//UUID用于标记任务
+                String contractId = UUID.randomUUID().toString();// 10个线程，每个都会创建1个UUID
+                System.out.println("*******************创建UUID：" + contractId);// UUID用于标记任务
                 test(contractId);
             }).start();
         }
     }
 
     private static void test(String contractId) {
-        try {//10个任务会依次休眠5秒（每个任务都会休眠5秒）
+        try {// 10个任务会依次休眠5秒（每个任务都会休眠5秒）
             Thread.sleep(5000);
-            System.out.println("*******************sleep UUID：" +contractId);
+            System.out.println("*******************sleep UUID：" + contractId);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }//任务醒来之后，继续执行
+        } // 任务醒来之后，继续执行
         System.out.println("*******************wake up UUID：" + contractId);
     }
 }
