@@ -11,8 +11,8 @@ import java.util.*;
  */
 public class MainClient {
     public static void main(String [] args){
-        Date start = strToDateLong("2019-05-09 00:00:00");
-        Date end = strToDateLong("2020-01-17 23:59:59");
+        Date start = strToDateLong("2022-08-19 00:00:00");
+        Date end = strToDateLong("2022-08-31 23:59:59");
         List<String> list = getMonths(start,end);
         System.out.println(list);
     }
