@@ -1,29 +1,68 @@
 package com.szewec.schedule;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * @author qianyy
+ * @author baiyang
  * @date 2021/6/11
  */
 public class MainClient {
     public static void main(String [] args){
         Date start = strToDateLong("2022-08-19 00:00:00");
         Date end = strToDateLong("2022-08-31 23:59:59");
-        List<String> list = getMonths(start,end);
+//        List<String> list = getMonths(start,end);
+        List<String> list = getMonthBetween(start,end);
         System.out.println(list);
+    }
+
+
+    /**
+     * 获取两个时间节点之间的月份列表
+     * 输入：2022-08-19 00:00:00和2022-08-31 23:59:59
+     * 输出：[2022-08]
+     * @param minDate
+     * @param maxDate
+     * @return
+     */
+    private static List<String> getMonthBetween(Date minDate, Date maxDate){
+        List<String> result = new ArrayList<String>();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");//格式化为年月
+
+            Calendar min = Calendar.getInstance();
+            Calendar max = Calendar.getInstance();
+            min.setTime(minDate);
+            min.set(min.get(Calendar.YEAR), min.get(Calendar.MONTH), 1);
+
+            max.setTime(maxDate);
+            max.set(max.get(Calendar.YEAR), max.get(Calendar.MONTH), 2);
+
+            Calendar curr = min;
+            while (curr.before(max)) {
+                result.add(sdf.format(curr.getTime()));
+                curr.add(Calendar.MONTH, 1);
+            }
+
+        return result;
     }
 
     /**
      * [2019-05, 2019-06, 2019-07, 2019-08, 2019-09, 2019-10, 2019-11, 2019-12, 2020-01]
      * [2019-05, 2019-06, 2019-07, 2019-08, 2019-09, 2019-10, 2019-11, 2019-12, 2020-01]
+     *
+     * 此方法在以下场景时输出结果不正确
+     * 输入：2022-08-19 00:00:00和2022-08-31 23:59:59
+     * 输出：[2022-08, 2022-09]
+     * 预期输出：[2022-08]
+     *
      * @param
      * @param
      * @return
      */
+    @Deprecated
     public static List<String> getMonths(Date start, Date end){
         List<String> res=new ArrayList<>();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
@@ -46,6 +85,13 @@ public class MainClient {
         return res;
     }
 
+    /**
+     * 此方法也存在输出结果不正确的场景
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    @Deprecated
     public static List<Map> getMonthsDetails(String startTime, String endTime){
         List<Map> res=new ArrayList<Map>();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
