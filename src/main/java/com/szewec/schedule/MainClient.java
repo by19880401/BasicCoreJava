@@ -1,7 +1,6 @@
 package com.szewec.schedule;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -22,8 +21,12 @@ public class MainClient {
 
     /**
      * 获取两个时间节点之间的月份列表
+     * CASE1:
      * 输入：2022-08-19 00:00:00和2022-08-31 23:59:59
      * 输出：[2022-08]
+     * CASE2:
+     * 输入：2021-08-19 00:00:00和2022-08-31 23:59:59
+     * 输出：[2021-08, 2021-09, 2021-10, 2021-11, 2021-12, 2022-01, 2022-02, 2022-03, 2022-04, 2022-05, 2022-06, 2022-07, 2022-08]
      * @param minDate
      * @param maxDate
      * @return
@@ -86,7 +89,7 @@ public class MainClient {
     }
 
     /**
-     * 此方法也存在输出结果不正确的场景
+     * 此方法也存在输出结果不正确的场景，同上
      * @param startTime
      * @param endTime
      * @return
