@@ -31,23 +31,23 @@ public class MainClient {
      * @param maxDate
      * @return
      */
-    private static List<String> getMonthBetween(Date minDate, Date maxDate){
+    public static List<String> getMonthBetween(Date minDate, Date maxDate) {
         List<String> result = new ArrayList<String>();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");//格式化为年月
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");// 格式化为年月
 
-            Calendar min = Calendar.getInstance();
-            Calendar max = Calendar.getInstance();
-            min.setTime(minDate);
-            min.set(min.get(Calendar.YEAR), min.get(Calendar.MONTH), 1);
+        Calendar min = Calendar.getInstance();
+        Calendar max = Calendar.getInstance();
+        min.setTime(minDate);
+        min.set(min.get(Calendar.YEAR), min.get(Calendar.MONTH), 1);
 
-            max.setTime(maxDate);
-            max.set(max.get(Calendar.YEAR), max.get(Calendar.MONTH), 2);
+        max.setTime(maxDate);
+        max.set(max.get(Calendar.YEAR), max.get(Calendar.MONTH), 2);
 
-            Calendar curr = min;
-            while (curr.before(max)) {
-                result.add(sdf.format(curr.getTime()));
-                curr.add(Calendar.MONTH, 1);
-            }
+        Calendar curr = min;
+        while (curr.before(max)) {
+            result.add(sdf.format(curr.getTime()));
+            curr.add(Calendar.MONTH, 1);
+        }
 
         return result;
     }
@@ -66,21 +66,21 @@ public class MainClient {
      * @return
      */
     @Deprecated
-    public static List<String> getMonths(Date start, Date end){
-        List<String> res=new ArrayList<>();
+    private static List<String> getMonths(Date start, Date end) {
+        List<String> res = new ArrayList<>();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
         try {
             Calendar tempStart = Calendar.getInstance();
             Calendar tempEnd = Calendar.getInstance();
             tempStart.setTime(start);
             tempEnd.setTime(end);
-            tempEnd.add(Calendar.MONTH,1);
+            tempEnd.add(Calendar.MONTH, 1);
             while (tempStart.before(tempEnd)) {
-                String month=dateFormat.format(tempStart.getTime());
+                String month = dateFormat.format(tempStart.getTime());
                 tempStart.set(Calendar.DAY_OF_MONTH, 1);
                 tempStart.set(Calendar.DAY_OF_MONTH, tempStart.getActualMaximum(Calendar.DAY_OF_MONTH));
                 res.add(month);
-                tempStart.add(Calendar.MONTH,1);
+                tempStart.add(Calendar.MONTH, 1);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,8 +95,8 @@ public class MainClient {
      * @return
      */
     @Deprecated
-    public static List<Map> getMonthsDetails(String startTime, String endTime){
-        List<Map> res=new ArrayList<Map>();
+    private static List<Map> getMonthsDetails(String startTime, String endTime) {
+        List<Map> res = new ArrayList<Map>();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
         DateFormat dateFormat2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         DateFormat dateFormat3 = new SimpleDateFormat("yyyy-MM-dd");
@@ -107,18 +107,18 @@ public class MainClient {
             tempStart.setTime(start);
             Calendar tempEnd = Calendar.getInstance();
             tempEnd.setTime(end);
-            tempEnd.add(Calendar.MONTH,1);// 日期加1(包含结束)
+            tempEnd.add(Calendar.MONTH, 1);// 日期加1(包含结束)
             while (tempStart.before(tempEnd)) {
-                String month=dateFormat.format(tempStart.getTime());
+                String month = dateFormat.format(tempStart.getTime());
                 tempStart.set(Calendar.DAY_OF_MONTH, 1);
-                String first=dateFormat3.format(tempStart.getTime());
+                String first = dateFormat3.format(tempStart.getTime());
                 tempStart.set(Calendar.DAY_OF_MONTH, tempStart.getActualMaximum(Calendar.DAY_OF_MONTH));
-                Map<String,Object> map=new HashMap<String,Object>();
+                Map<String, Object> map = new HashMap<String, Object>();
                 map.put("month", month);
-                map.put("first", dateFormat2.parse(first+" 00:00:00"));
-                map.put("last", dateFormat2.parse(first+" 23:59:59"));
+                map.put("first", dateFormat2.parse(first + " 00:00:00"));
+                map.put("last", dateFormat2.parse(first + " 23:59:59"));
                 res.add(map);
-                tempStart.add(Calendar.MONTH,1);
+                tempStart.add(Calendar.MONTH, 1);
             }
         } catch (Exception e) {
             e.printStackTrace();
