@@ -6,7 +6,8 @@ import java.util.Random;
 import java.util.concurrent.*;
 
 /**
- * 一次性提交多个线程任务，所有任务执行完成后，返回完成标识
+ * 一次性提交多个线程任务，所有任务执行完成后，返回完成消息
+ * 
  * @author baiyang
  * @date 2021/6/16
  */
