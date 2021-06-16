@@ -12,11 +12,11 @@ import java.util.concurrent.*;
  * @date 2021/6/16
  */
 public class MultipleThreadDemo2 {
-    private static final int THREAD_NUM = 2;
+    private static final int THREAD_NUM = 100;
 
     public static void main(String[] args) {
         ExecutorService threadPool = Executors.newFixedThreadPool(THREAD_NUM);
-        CompletionService<String> completionService = new ExecutorCompletionService<String>(threadPool);
+        CompletionService<String> completionService = new ExecutorCompletionService<>(threadPool);
         List<Photo> pList = initPhotoes();
         try {
             for (Photo photo : pList) {
@@ -38,9 +38,10 @@ public class MultipleThreadDemo2 {
             do {
                 future = completionService.take();
                 System.out.println(future.get());
-                if (future.isDone() && !future.isCancelled()) {
+                // 如下条件会导致死循环，故注释掉
+//                if (future.isDone() && !future.isCancelled()) {
                     completeNum++;
-                }
+//                }
             } while (completeNum < pList.size());
 
             System.out.println("all task is complete.");
