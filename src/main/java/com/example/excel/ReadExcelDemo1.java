@@ -8,10 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 读取为Map列表，默认第一行为标题行，Map中的key为标题，value为标题对应的单元格值
  * @author baiyang
  * @date 2021/6/22
  */
-public class ReadExcelDemo {
+public class ReadExcelDemo1 {
     public static void main(String [] args){
         ExcelReader reader = ExcelUtil.getReader(FileUtil.file("C:\\Users\\qianyy\\Downloads\\计量支付测试12标ly2021年04月实际进度.xlsx"));
         List<Map<String, Object>> list = reader.readAll();
