@@ -8,10 +8,19 @@ import java.util.Date;
  */
 public class Person {
     private String id;
+    private String name;
     private Integer year;
     private Integer month;
     private Date planStart;
     private Date planEnd;
+
+    public Person() {
+    }
+
+    public Person(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public String getId() {
         return id;
@@ -19,6 +28,14 @@ public class Person {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getYear() {
@@ -55,7 +72,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" + "id='" + id + '\'' + ", year=" + year + ", month=" + month + ", planStart=" + planStart
-            + ", planEnd=" + planEnd + '}';
+        return "Person{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", year=" + year + ", month=" + month
+            + ", planStart=" + planStart + ", planEnd=" + planEnd + '}';
     }
 }
