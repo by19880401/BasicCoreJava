@@ -14,7 +14,7 @@ public class ToMapAllDemo2 {
     private static final Integer MAX_VAL = 6;
     /**
      *
-     * Collectors.toMap(key,v->v,(v1,v2)->v1)
+     * Collectors.toMap(key,v->v,(v1,v2)->v1)，是为了解决当key重复时的数据冲突问题
      *
      * //其中key 就是map得key值
      * //第二个参数就是map得value
@@ -31,7 +31,7 @@ public class ToMapAllDemo2 {
         pMap.forEach((k, v) -> System.out.println("key:" + k + ",value:" + v));
 
         /**
-         * (1) (v1,v2)->v1, the result is as follows:
+         * (1) (v1,v2)->v1, 当key重新时，即map里有两个相同一key时，value使用原来的旧值，the result is as follows:
          * Person{id='1', name='willis-1', year=2021, month=1, planStart=null, planEnd=null}
          * Person{id='2', name='willis-2', year=2021, month=2, planStart=null, planEnd=null}
          * Person{id='3', name='willis-3', year=2021, month=3, planStart=null, planEnd=null}
@@ -43,7 +43,7 @@ public class ToMapAllDemo2 {
          * key:3,value:willis-3
          * key:4,value:willis-4
          * key:5,value:willis-5
-         * (2) (v1,v2)->v2, the result is as follows:
+         * (2) (v1,v2)->v2, 当key重新时，即map里有两个相同一key时，value使用后来的新值，the result is as follows:
          * Person{id='1', name='willis-1', year=2021, month=1, planStart=null, planEnd=null}
          * Person{id='2', name='willis-2', year=2021, month=2, planStart=null, planEnd=null}
          * Person{id='3', name='willis-3', year=2021, month=3, planStart=null, planEnd=null}
@@ -55,7 +55,7 @@ public class ToMapAllDemo2 {
          * key:3,value:willis-3
          * key:4,value:willis-4
          * key:5,value:willis-5
-         * (3)(v1, v2) -> v1 + "," + v2)
+         * (3)(v1, v2) -> v1 + "," + v2)，当key重新时，即map里有两个相同一key时，value使用"新值,旧值"的格式
          * Person{id='1', name='willis-1', year=2021, month=1, planStart=null, planEnd=null}
          * Person{id='2', name='willis-2', year=2021, month=2, planStart=null, planEnd=null}
          * Person{id='3', name='willis-3', year=2021, month=3, planStart=null, planEnd=null}
