@@ -43,7 +43,13 @@ public class ToMapAllDemo3 {
          *
          */
 
-        // TODO
+        // 分组,按照year分组，分为两组
+        Map<Integer,List<Person>> pgMap = pList.stream().collect(Collectors.groupingBy(p->p.getYear()));
+        pgMap.forEach((k, v) -> System.out.println("key:" + k + ",value:" + v));
+        /**
+         * key:2020,value:[Person{id='2', name='Lucy&Lily', year=2020, month=6, planStart=null, planEnd=null}]
+         * key:2021,value:[Person{id='1', name='willis-1', year=2021, month=1, planStart=null, planEnd=null}, Person{id='2', name='willis-2', year=2021, month=2, planStart=null, planEnd=null}, Person{id='3', name='willis-3', year=2021, month=3, planStart=null, planEnd=null}, Person{id='4', name='willis-4', year=2021, month=4, planStart=null, planEnd=null}, Person{id='5', name='willis-5', year=2021, month=5, planStart=null, planEnd=null}]
+         */
     }
 
     /**
