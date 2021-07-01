@@ -19,7 +19,7 @@ public class ToMapAllDemo4 {
         List<Person> pList = initList();
         // 打印
         pList.stream().forEach(p -> System.out.println(p));
-        // 数据封装2：普通方式
+        /** 数据封装2：普通方式，同syniverse时代码*/
         Map<String, List<Person>> pMap = Maps.newLinkedHashMap();
         for (Person p : pList) {
             String key = p.getId();
