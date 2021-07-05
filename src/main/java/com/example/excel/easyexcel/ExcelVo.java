@@ -19,7 +19,7 @@ public class ExcelVo {
     private String monthActualProgress;
     @ExcelProperty(value = "实体单元编码", index = 5)
     private String websId;
-    @ExcelProperty(value = "实体单元名称", index = 6)
+    @ExcelProperty(value = "异常提示", index = 6)
     private String question;
 
     public String getWbsName() {
