@@ -33,9 +33,9 @@ public class WriteTempWithSimplePathMain {
             String readPath = "C:\\Users\\qianyy\\Downloads\\template_excel.xlsx";
             InputStream inputStream = new FileInputStream(new File(readPath));
 
-            // 临时文件名称
+            // 根据上述模板，进行写操作时，输出的文件名称
             String writePath = "C:\\Users\\qianyy\\Downloads\\" + System.currentTimeMillis() + "_template_excel.xlsx";
-            System.out.println("临时文件路径及名称:" + writePath);
+            System.out.println("输出的文件路径及名称:" + writePath);
 
             // 生成数据
             List<ExcelTempVo> dataList = initDataList();
