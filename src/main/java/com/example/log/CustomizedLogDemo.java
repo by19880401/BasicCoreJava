@@ -11,7 +11,12 @@ import cn.hutool.log.dialect.jdk.JdkLogFactory;
  */
 public class CustomizedLogDemo {
     public static void main(String[] args) {
+        //自定义日志实现为JDK Logging
         LogFactory logFactory = LogFactory.setCurrentLogFactory(new JdkLogFactory());
+        //自定义日志实现为Apache Commons Logging
+        /*LogFactory logFactory = LogFactory.setCurrentLogFactory(new ApacheCommonsLogFactory());*/
+        //自定义日志实现为Console Logging
+        /*LogFactory logFactory = LogFactory.setCurrentLogFactory(new ConsoleLogFactory());*/
         Log log = logFactory.getLog(CustomizedLogDemo.class);
         log.info("this is the demo for {}", "自定义LOG日志");
     }
