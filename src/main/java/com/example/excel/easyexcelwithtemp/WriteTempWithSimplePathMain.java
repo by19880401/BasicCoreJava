@@ -1,14 +1,12 @@
 package com.example.excel.easyexcelwithtemp;
 
+import cn.hutool.core.io.resource.ClassPathResource;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.StringUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
@@ -30,8 +28,12 @@ public class WriteTempWithSimplePathMain {
     public static void main(String[] args) {
         try {
             // 获取模版文件资源信息、流信息
-            String readPath = "C:\\Users\\qianyy\\Downloads\\template_excel.xlsx";
-            InputStream inputStream = new FileInputStream(new File(readPath));
+            /*String readPath = "C:\\Users\\qianyy\\Downloads\\template_excel.xlsx";
+            InputStream inputStream = new FileInputStream(new File(readPath));*/
+
+            /**也可以使用如下方式获取模板文件信息、流信息，但下述是相对路径: resources为根路径，始于此*/
+            ClassPathResource resource = new ClassPathResource("template/template_excel.xlsx");
+            InputStream inputStream = resource.getStream();
 
             // 根据上述模板，进行写操作时，输出的文件名称
             String writePath = "C:\\Users\\qianyy\\Downloads\\" + System.currentTimeMillis() + "_template_excel.xlsx";
@@ -45,7 +47,8 @@ public class WriteTempWithSimplePathMain {
             // 填充集合 {.name}
             excelWriter.fill(dataList, writeSheet);
             excelWriter.finish();
-        } catch (FileNotFoundException e) {
+            inputStream.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
