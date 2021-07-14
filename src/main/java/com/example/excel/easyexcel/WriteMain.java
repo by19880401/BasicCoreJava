@@ -13,7 +13,7 @@ import java.util.UUID;
  * @date 2021/7/5
  */
 public class WriteMain {
-    private static final int MAX_NUM = 100000;
+    private static final int MAX_NUM = 100;
 
     public static void main(String[] args) {
         String filePath = "C:\\Users\\qianyy\\Downloads\\test_excel.xlsx";

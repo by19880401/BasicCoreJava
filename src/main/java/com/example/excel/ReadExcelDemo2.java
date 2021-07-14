@@ -1,13 +1,12 @@
 package com.example.excel;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author baiyang
@@ -19,19 +18,36 @@ public class ReadExcelDemo2 {
     private static final String TITLE_END = "（实际）结束时间";
     private static final String TITLE_NO_PROGRESS = "截止上月末累计完成比例（%）";
     private static final String TITLE_COM_PROGRESS = "本月实际完成比例（%）";
-    private static final String TITLE_ENTITY_ID = "实体单元编码 ";
+    private static final String TITLE_ENTITY_ID = "实体单元编码";
+
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
+
+    private static String parseObject(Object obj) {
+        if (Objects.isNull(obj)) {
+            return "";
+        }
+        if (obj instanceof Date) {
+            Date dateVal = (Date)obj;
+            return DateUtil.format(dateVal, DATE_FORMAT);
+        } else if (obj instanceof Long) {
+            Long longVal = (Long)obj;
+            return Long.toString(longVal);
+        } else {
+            return "";
+        }
+    }
 
     public static void main(String[] args) {
-        ExcelReader reader = ExcelUtil.getReader(FileUtil.file("C:\\Users\\qianyy\\Downloads\\计量支付测试12标ly2021年04月实际进度.xlsx"));
+        ExcelReader reader = ExcelUtil.getReader(FileUtil.file("C:\\Users\\qianyy\\Downloads\\新塘1标2021年7月实际进度.xlsx"));
         List<Map<String, Object>> list = reader.readAll();
         List<ImportOrExportVo> voList = new ArrayList<>();
         list.stream().forEach(map -> {
             ImportOrExportVo vo = new ImportOrExportVo();
             String titleName = (String)map.get(TITLE_NAME);
-            String titleStart = (String)map.get(TITLE_START);
-            String titleEnd = (String)map.get(TITLE_END);
-            String titleNoProgress = (String)map.get(TITLE_NO_PROGRESS);
-            String titleComProgress = (String)map.get(TITLE_COM_PROGRESS);
+            String titleStart = parseObject(map.get(TITLE_START));
+            String titleEnd = parseObject(map.get(TITLE_END));
+            String titleNoProgress = parseObject(map.get(TITLE_NO_PROGRESS));
+            String titleComProgress = parseObject(map.get(TITLE_COM_PROGRESS));
             String titleEntityId = (String)map.get(TITLE_ENTITY_ID);
             vo.setWbsName(StringUtils.isBlank(titleName) ? "" : titleName);
             vo.setStartStr(StringUtils.isBlank(titleStart) ? "" : titleStart);
