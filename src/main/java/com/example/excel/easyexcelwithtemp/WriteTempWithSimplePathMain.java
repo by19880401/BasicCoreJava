@@ -1,6 +1,7 @@
 package com.example.excel.easyexcelwithtemp;
 
 import cn.hutool.core.io.resource.ClassPathResource;
+import cn.hutool.log.StaticLog;
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.write.metadata.WriteSheet;
@@ -49,7 +50,7 @@ public class WriteTempWithSimplePathMain {
             excelWriter.finish();
             inputStream.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            StaticLog.warn("Exception occurs.",e);
         }
     }
 
