@@ -22,23 +22,37 @@ public class ReadExcelDemo2 {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
 
+    /**
+     * 解析object对象，把它转化为不同类型的对象值，返回
+     * @param obj
+     * @return
+     */
     private static String parseObject(Object obj) {
         if (Objects.isNull(obj)) {
             return "";
         }
         if (obj instanceof Date) {
-            Date dateVal = (Date)obj;
+            Date dateVal = (Date) obj;
             return DateUtil.format(dateVal, DATE_FORMAT);
         } else if (obj instanceof Long) {
-            Long longVal = (Long)obj;
+            Long longVal = (Long) obj;
             return Long.toString(longVal);
+        } else if (obj instanceof Double) {
+            Double doubleVal = (Double) obj;
+            return Double.toString(doubleVal);
+        } else if (obj instanceof Integer) {
+            Integer intVal = (Integer) obj;
+            return Integer.toString(intVal);
+        } else if (obj instanceof String) {
+            String strVal = (String) obj;
+            return strVal;
         } else {
-            return "";
+            return String.valueOf(obj);
         }
     }
 
     public static void main(String[] args) {
-        ExcelReader reader = ExcelUtil.getReader(FileUtil.file("C:\\Users\\qianyy\\Downloads\\新塘1标2021年7月实际进度.xlsx"));
+        ExcelReader reader = ExcelUtil.getReader(FileUtil.file("C:\\Users\\qianyy\\Downloads\\新塘1标2021年8月实际进度(1).xlsx"));
         List<Map<String, Object>> list = reader.readAll();
         List<ImportOrExportVo> voList = new ArrayList<>();
         list.stream().forEach(map -> {
