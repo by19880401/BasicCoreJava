@@ -24,7 +24,7 @@ public class ObjectDemo {
         Fish f = new Fish();
         f.setId(1);
         f.setName("willis");
-        f.setAddress("GaoXinHuaFu.XiFen.3Road");
+        f.setAddress("GaoXinHuaFu.XiFen No.3Road");
         return f;
     }
 
