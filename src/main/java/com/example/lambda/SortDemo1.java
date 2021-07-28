@@ -12,7 +12,7 @@ import java.util.List;
  * @date 2021/7/28
  * @
  */
-public class SortDemo {
+public class SortDemo1 {
     private static final Integer MAX_VAL = 10;
     public static void main(String [] args){
         List<Person> pList = initList();
