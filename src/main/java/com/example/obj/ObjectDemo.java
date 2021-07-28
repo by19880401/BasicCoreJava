@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
  */
 public class ObjectDemo {
     public static void main(String[] args) {
-        Fish f = testCase3();
+        BlackFish f = testCase2();
         StaticLog.info("print info: {}, is null-->{}", f, isObjAllFieldsNull(f));
     }
 
@@ -20,8 +20,8 @@ public class ObjectDemo {
         return new Fish();
     }
 
-    public static Fish testCase2() {
-        Fish f = new Fish();
+    public static BlackFish testCase2() {
+        BlackFish f = new BlackFish();
         f.setId(1);
         f.setName("willis");
         f.setAddress("GaoXinHuaFu.XiFen No.3Road");

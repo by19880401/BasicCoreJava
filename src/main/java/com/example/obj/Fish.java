@@ -1,6 +1,5 @@
 package com.example.obj;
 
-import lombok.Data;
 import lombok.ToString;
 
 /**
