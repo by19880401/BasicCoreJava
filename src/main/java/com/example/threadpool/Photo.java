@@ -1,9 +1,12 @@
 package com.example.threadpool;
 
+import lombok.ToString;
+
 /**
  * @author baiyang
  * @date 2021/6/16
  */
+@ToString
 public class Photo {
     private Integer id;
     private String name;
@@ -22,10 +25,5 @@ public class Photo {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "Photo{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }
