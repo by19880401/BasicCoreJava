@@ -18,7 +18,7 @@ import cn.hutool.log.StaticLog;
  * 写法二：（修饰的是一个代码块）
  * public void method()
  * {
- *    synchronized(this) {
+ *    synchronized(this) {//同修饰一个类
  *
  *    }
  * }

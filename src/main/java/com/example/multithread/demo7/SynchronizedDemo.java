@@ -6,6 +6,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
+ * 修饰一个类
+ *
  * @author bai.yang email:willis.bai@outlook.com
  * @date 2021/8/9
  * @
