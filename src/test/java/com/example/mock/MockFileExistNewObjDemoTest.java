@@ -17,7 +17,7 @@ public class MockFileExistNewObjDemoTest {
 
     @Test
     @PrepareForTest(MockFileExistNewObjDemo.class)
-    public void testInvokeMethodToCheckFileExistNewObj(){
+    public void testInvokeMethodToCheckFileExistNewObj() {
         File file = PowerMockito.mock(File.class);
         try {
             PowerMockito.whenNew(File.class).withArguments("Willis").thenReturn(file);

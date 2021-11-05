@@ -12,7 +12,7 @@ public class MockFileExistDemoTest {
      * normal mock
      */
     @Test
-    public void testInvokeMethodToCheckFileExist(){
+    public void testInvokeMethodToCheckFileExist() {
         // mock file object
         File file = PowerMockito.mock(File.class);
         // when meet file.exist() then return true
