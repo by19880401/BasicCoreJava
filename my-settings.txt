@@ -1,0 +1,6 @@
+//BeiJingWuJian token
+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
+//the normal url
+https://github.com/by19880401/BasicCoreJava.git
+//the url with token
+git remote set-url origin https://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@github.com/by19880401/BasicCoreJava.git
