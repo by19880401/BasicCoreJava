@@ -1,4 +1,4 @@
-package mockprivate;
+package com.objectiva.mockprivate;
 
 public class DemoPrivate {
 

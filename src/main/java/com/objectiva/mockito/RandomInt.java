@@ -1,4 +1,4 @@
-package mockito;
+package com.objectiva.mockito;
 
 import java.util.Random;
 

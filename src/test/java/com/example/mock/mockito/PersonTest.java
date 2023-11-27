@@ -1,5 +1,6 @@
 package com.example.mock.mockito;
 
+import com.objectiva.mockito.Person;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -8,7 +9,7 @@ public class PersonTest {
 
     @Test
     public void testGetSex() {
-        mockito.Person person = Mockito.spy(mockito.Person.class);
+        Person person = Mockito.spy(Person.class);
         person.getSex(0);//必须要调用一次, 后面才能verify到调用的次数
         Mockito.verify(person).getSex(0);//这行代码与下一行代码等效,这行代码并不会真正调用getSex()方法, 而仅是统计调用getSex()方法的次数
 //        Mockito.verify(person, Mockito.times(1)).getSex(0);

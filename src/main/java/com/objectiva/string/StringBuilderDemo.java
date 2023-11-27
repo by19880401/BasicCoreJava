@@ -1,7 +1,6 @@
 package com.objectiva.string;
 
 import cn.hutool.log.StaticLog;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
