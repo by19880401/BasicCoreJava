@@ -11,6 +11,10 @@ public class OptionalNullDemo {
     }
 
 
+    /**
+     * what's that? amazing?
+     * @param param
+     */
     private static void testOptional(Optional<String> param){
         Optional<String> opt = Optional.ofNullable(param).orElse(Optional.empty());
         StaticLog.info("reset quota limits by tenantId: {}.", opt.isPresent()?opt.get():null);
