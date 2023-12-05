@@ -10,6 +10,6 @@ public class TestFile {
         System.out.println("This is a test to check if the code can be promoted to GitHub by TortoiseGit Tool.");
         StaticLog.info("This is a test to check if the code can be promoted to GitHub by TortoiseGit Tool.");
         StaticLog.info("This is a test to check if the code can be promoted to GitHub by TortoiseGit Tool.");
-        StaticLog.info("This is a test to check if the code can be promoted to GitHub by TortoiseGit Tool.");
+        StaticLog.info("This is a test.");
     }
 }
