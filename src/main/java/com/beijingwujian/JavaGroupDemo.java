@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * lamoda分组的便利性
+ */
 public class JavaGroupDemo {
     public static void main(String[] args) {
         List<User> list = new ArrayList<>();
