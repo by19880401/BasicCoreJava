@@ -26,5 +26,14 @@ public class JavaGroupDemo {
         for(Map.Entry m : entries){
             System.out.println(m);
         }
+
+        /**
+         * Result as below:
+         *
+         * 1=[User(id=1, name=1), User(id=1, name=2)]
+         * 2=[User(id=2, name=2), User(id=2, name=3), User(id=2, name=4)]
+         * 3=[User(id=3, name=3)]
+         */
+
     }
 }
