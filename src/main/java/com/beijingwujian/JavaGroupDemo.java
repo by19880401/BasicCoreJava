@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * lamoda分组的便利性
+ * lambda分组的便利性
  */
 public class JavaGroupDemo {
     public static void main(String[] args) {
