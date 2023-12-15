@@ -31,7 +31,7 @@ public class JavaGroupDemo {
         }
 
         /**
-         * Result as below:
+         * Result as below:啥也不是
          *
          * 1=[User(id=1, name=1), User(id=1, name=2)]
          * 2=[User(id=2, name=2), User(id=2, name=3), User(id=2, name=4)]
