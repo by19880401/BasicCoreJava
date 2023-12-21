@@ -14,7 +14,7 @@ public class JavaLogDemo {
     /**
      * 主函数，每天执行它
      *
-     * @param args
+     * @param args 参数
      */
     public static void main(String[] args) {
         // 获取当前时间
@@ -39,7 +39,7 @@ public class JavaLogDemo {
     /**
      * 格式化（当前）时间
      *
-     * @return
+     * @return 返回string类型的结果，如果2023-12-21
      */
     private static String getCurrentTimeStr() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
