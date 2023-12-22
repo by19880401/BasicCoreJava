@@ -24,15 +24,7 @@ public class JavaLogDemo {
         ClassPathResource resource = new ClassPathResource("/log/" + currentDate + ".md");
         try {
             // 获取MD文件
-            String filePath = null;
-            File file = resource.getFile();
-            if (!file.exists()) {
-                // 如果文件不存在，则创建出该文件
-                boolean isCreated = file.createNewFile();
-                StaticLog.info("创建日志文件：{}", isCreated);
-            }
-            // 如果文件存在，则获取文件的路径
-            filePath = file.getPath();
+            String filePath = resource.getFile().getPath();
             // 读取MD文件
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             // 一行一行遍历文件内容，打印
