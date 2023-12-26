@@ -22,6 +22,7 @@ public class JavaLogDemo {
         String currentDate = getCurrentTimeStr();
         // 把当前时间作为参数，获取当天的日志markdown文件
         ClassPathResource resource = new ClassPathResource("/log/" + currentDate + ".md");
+        // TODO 考虑根据不同的操作系统来读取或者创建日志路径！
         try {
             // 获取MD文件
             String filePath = resource.getFile().getPath();
