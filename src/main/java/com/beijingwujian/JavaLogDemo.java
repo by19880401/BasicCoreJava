@@ -1,12 +1,13 @@
 package com.beijingwujian;
 
 import cn.hutool.log.StaticLog;
+import com.common.CastUtils;
 import org.springframework.beans.factory.config.YamlMapFactoryBean;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.CollectionUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -14,7 +15,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class JavaLogDemo {
 
@@ -27,12 +27,14 @@ public class JavaLogDemo {
         yamlMapFactoryBean.setResources(new ClassPathResource("application.yml"));
         // 通过getObject()方法获取Map对象
         Map<String, Object> yamlMap = yamlMapFactoryBean.getObject();
-        yamlMap.keySet().forEach(item -> {
-            // 可以将map中的值强转为LinkedHashMap对象
-            LinkedHashMap<String, Object> linkedHashMap = (LinkedHashMap<String, Object>) (yamlMap.get(item));
-            // TODO 考虑根据windows和macos系统自动加载对应的路径
-            filePath = (String) linkedHashMap.get("windows.filePath");
-        });
+        if (!CollectionUtils.isEmpty(yamlMap)) {
+            yamlMap.keySet().forEach(item -> {
+                // 可以将map中的值强转为LinkedHashMap对象
+                LinkedHashMap<String, Object> linkedHashMap = CastUtils.cast(yamlMap.get(item));
+                // TODO 考虑根据windows和macos系统自动加载对应的路径
+                filePath = (String) linkedHashMap.get("windows.filePath");
+            });
+        }
     }
 
     /**
@@ -52,12 +54,12 @@ public class JavaLogDemo {
                 if (dir.isDirectory()) {
                     // 如果是已存在的目录，则直接在该目录下创建日志文件
                     File file = new File(filePath + File.separator + resource.getFilename());
-                    file.createNewFile();
-                    StaticLog.info("a new file is created for {}", currentDate);
+                    boolean isCreateFile = file.createNewFile();
+                    StaticLog.info("a new file is created [{}] for {}", isCreateFile, currentDate);
                 } else {
                     // 创建目录
-                    dir.mkdirs();
-                    StaticLog.info("a new directory is created.");
+                    boolean isMkDirs = dir.mkdirs();
+                    StaticLog.info("a new directory is created [{}].", isMkDirs);
                 }
                 return;
             }
