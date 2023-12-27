@@ -23,6 +23,7 @@ public class JavaLogDemo {
 
     // 静态块读取日志文件路径配置，只读一次
     static {
+        // 读取yaml文件配置
         YamlMapFactoryBean yamlMapFactoryBean = new YamlMapFactoryBean();
         yamlMapFactoryBean.setResources(new ClassPathResource("application.yml"));
         // 通过getObject()方法获取Map对象
@@ -31,8 +32,15 @@ public class JavaLogDemo {
             yamlMap.keySet().forEach(item -> {
                 // 可以将map中的值强转为LinkedHashMap对象
                 LinkedHashMap<String, Object> linkedHashMap = CastUtils.cast(yamlMap.get(item));
-                // TODO 考虑根据windows和macos系统自动加载对应的路径
-                filePath = (String) linkedHashMap.get("windows.filePath");
+                // 获取操作系统参数
+                String osName = System.getProperty("os.name");
+                if (osName.startsWith("Windows")) {
+                    filePath = (String) linkedHashMap.get("windows.filePath");
+                } else if (osName.startsWith("Mac OS")) {
+                    filePath = (String) linkedHashMap.get("macOs.filepath");
+                } else {
+                    // unix or linux
+                }
             });
         }
     }
@@ -43,6 +51,7 @@ public class JavaLogDemo {
      * @param args 参数
      */
     public static void main(String[] args) {
+        StaticLog.info("current filePath: [{}]", filePath);
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
         // 把当前时间作为参数，获取当天的日志markdown文件
