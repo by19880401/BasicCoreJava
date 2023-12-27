@@ -52,7 +52,7 @@ public class JavaLogDemo {
      * @param args 参数
      */
     public static void main(String[] args) {
-        StaticLog.info("current filePath: [{}]", filePath);
+        StaticLog.info("current filePath: [{}]", filePath);// TODO windows测试通过，
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
         // 把当前时间作为参数，获取当天的日志markdown文件
