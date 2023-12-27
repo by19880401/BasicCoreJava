@@ -27,7 +27,7 @@ public class JavaLogDemo {
         yamlMapFactoryBean.setResources(new ClassPathResource("application.yml"));
         // 通过getObject()方法获取Map对象
         Map<String, Object> yamlMap = yamlMapFactoryBean.getObject();
-        yamlMap.keySet().forEach(item->{
+        yamlMap.keySet().forEach(item -> {
             // 可以将map中的值强转为LinkedHashMap对象
             LinkedHashMap<String, Object> linkedHashMap = (LinkedHashMap<String, Object>) (yamlMap.get(item));
             // TODO 考虑根据windows和macos系统自动加载对应的路径
@@ -48,10 +48,21 @@ public class JavaLogDemo {
         try {
             if (!resource.exists()) {
                 StaticLog.info("MD file doesn't exist, start to create it.");
-                URL path = ClassLoader.getSystemResource(filePath);
-                StaticLog.info("{}", path);
+                File dir = new File(filePath);
+                if (dir.isDirectory()) {
+                    // 如果是已存在的目录，则直接在该目录下创建日志文件
+                    File file = new File(filePath + File.separator + resource.getFilename());
+                    file.createNewFile();
+                    StaticLog.info("a new file is created for {}", currentDate);
+                } else {
+                    // 创建目录
+                    dir.mkdirs();
+                    StaticLog.info("a new directory is created.");
+                }
+                return;
             }
 
+            StaticLog.info("MD file has already exist, read it.");
             // 获取MD文件
             String filePath = resource.getFile().getPath();
             // 读取MD文件
