@@ -18,9 +18,10 @@ import java.util.Objects;
 
 public class JavaLogDemo {
 
-    // 文件路径
+    // 日志文件路径
     private static String filePath = "";
 
+    // 静态块读取日志文件路径配置，只读一次
     static {
         YamlMapFactoryBean yamlMapFactoryBean = new YamlMapFactoryBean();
         yamlMapFactoryBean.setResources(new ClassPathResource("application.yml"));
@@ -40,19 +41,16 @@ public class JavaLogDemo {
      * @param args 参数
      */
     public static void main(String[] args) {
-        StaticLog.info("file.path-->{}", filePath);
-
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
         // 把当前时间作为参数，获取当天的日志markdown文件
         ClassPathResource resource = new ClassPathResource("/log/" + currentDate + ".md");
         try {
-//            if (!resource.exists()) {
-//                StaticLog.info("MD file doesn't exist, start to create it.");
-//                String filePath = resource.getPath();
-//                URL path = ClassLoader.getSystemResource(filePath);
-//                StaticLog.info(path.getPath());
-//            }
+            if (!resource.exists()) {
+                StaticLog.info("MD file doesn't exist, start to create it.");
+                URL path = ClassLoader.getSystemResource(filePath);
+                StaticLog.info("{}", path);
+            }
 
             // 获取MD文件
             String filePath = resource.getFile().getPath();
