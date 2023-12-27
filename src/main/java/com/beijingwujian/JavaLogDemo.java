@@ -11,18 +11,27 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class JavaLogDemo {
 
-    private static Map<String, Object> yamlMap = null;//yaml配置
+    // 文件路径
+    private static String filePath = "";
 
     static {
         YamlMapFactoryBean yamlMapFactoryBean = new YamlMapFactoryBean();
         yamlMapFactoryBean.setResources(new ClassPathResource("application.yml"));
-        yamlMap = yamlMapFactoryBean.getObject();
+        // 通过getObject()方法获取Map对象
+        Map<String, Object> yamlMap = yamlMapFactoryBean.getObject();
+        yamlMap.keySet().forEach(item->{
+            // 可以将map中的值强转为LinkedHashMap对象
+            LinkedHashMap<String, Object> linkedHashMap = (LinkedHashMap<String, Object>) (yamlMap.get(item));
+            // TODO 考虑根据windows和macos系统自动加载对应的路径
+            filePath = (String) linkedHashMap.get("windows.filePath");
+        });
     }
 
     /**
@@ -31,16 +40,12 @@ public class JavaLogDemo {
      * @param args 参数
      */
     public static void main(String[] args) {
-        yamlMap.keySet().forEach(item->{
-
-        });
+        StaticLog.info("file.path-->{}", filePath);
 
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
         // 把当前时间作为参数，获取当天的日志markdown文件
         ClassPathResource resource = new ClassPathResource("/log/" + currentDate + ".md");
-        // TODO 考虑根据不同的操作系统来读取或者创建日志路径！
-        ClassPathResource resource = new ClassPathResource("/log/" + currentDate + "1.md");
         try {
 //            if (!resource.exists()) {
 //                StaticLog.info("MD file doesn't exist, start to create it.");

@@ -1,2 +1,3 @@
 log:
-  filepath: D:\local-repos\BasicCoreJava\src\main\resources\log
+    windows.filePath: D:\local-repos\BasicCoreJava\src\main\resources\log
+    macOs.filepath: #TODO
