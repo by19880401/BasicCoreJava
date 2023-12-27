@@ -40,6 +40,7 @@ public class JavaLogDemo {
                     filePath = (String) linkedHashMap.get("macOs.filepath");
                 } else {
                     // unix or linux
+                    filePath = (String) linkedHashMap.get("linux.filepath");
                 }
             });
         }
