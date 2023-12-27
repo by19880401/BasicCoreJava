@@ -1,28 +1,52 @@
 package com.beijingwujian;
 
 import cn.hutool.log.StaticLog;
+import org.springframework.beans.factory.config.YamlMapFactoryBean;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class JavaLogDemo {
+
+    private static Map<String, Object> yamlMap = null;//yaml配置
+
+    static {
+        YamlMapFactoryBean yamlMapFactoryBean = new YamlMapFactoryBean();
+        yamlMapFactoryBean.setResources(new ClassPathResource("application.yml"));
+        yamlMap = yamlMapFactoryBean.getObject();
+    }
+
     /**
      * 主函数，每天执行它
      *
      * @param args 参数
      */
     public static void main(String[] args) {
+        yamlMap.keySet().forEach(item->{
+
+        });
+
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
         // 把当前时间作为参数，获取当天的日志markdown文件
-        ClassPathResource resource = new ClassPathResource("/log/" + currentDate + ".md");
+        ClassPathResource resource = new ClassPathResource("/log/" + currentDate + "1.md");
         try {
+//            if (!resource.exists()) {
+//                StaticLog.info("MD file doesn't exist, start to create it.");
+//                String filePath = resource.getPath();
+//                URL path = ClassLoader.getSystemResource(filePath);
+//                StaticLog.info(path.getPath());
+//            }
+
             // 获取MD文件
             String filePath = resource.getFile().getPath();
             // 读取MD文件
