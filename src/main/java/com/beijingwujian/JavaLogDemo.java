@@ -2,6 +2,7 @@ package com.beijingwujian;
 
 import cn.hutool.log.StaticLog;
 import com.common.CastUtils;
+import com.common.SystemUtils;
 import org.springframework.beans.factory.config.YamlMapFactoryBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.CollectionUtils;
@@ -32,14 +33,15 @@ public class JavaLogDemo {
             yamlMap.keySet().forEach(item -> {
                 // 可以将map中的值强转为LinkedHashMap对象
                 LinkedHashMap<String, Object> linkedHashMap = CastUtils.cast(yamlMap.get(item));
-                // 获取操作系统参数
-                String osName = System.getProperty("os.name");
-                if (osName.startsWith("Windows")) {
+                if (SystemUtils.isWindows()) {
+                    StaticLog.info("It's running on Windows OS");
                     filePath = (String) linkedHashMap.get("windows.filePath");
-                } else if (osName.startsWith("Mac OS")) {
+                } else if (SystemUtils.isMacOs()) {
+                    StaticLog.info("It's running on Mac OS");
                     filePath = (String) linkedHashMap.get("macOs.filepath");
                 } else {
                     // unix or linux
+                    StaticLog.info("It's running on Linux or Unix OS");
                     filePath = (String) linkedHashMap.get("linux.filepath");
                 }
             });
@@ -52,7 +54,7 @@ public class JavaLogDemo {
      * @param args 参数
      */
     public static void main(String[] args) {
-        StaticLog.info("current filePath: [{}]", filePath);// TODO windows测试通过，
+        StaticLog.info("current filePath: {}", filePath);// TODO windows测试通过，
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
         // 把当前时间作为参数，获取当天的日志markdown文件
@@ -65,11 +67,11 @@ public class JavaLogDemo {
                     // 如果是已存在的目录，则直接在该目录下创建日志文件
                     File file = new File(filePath + File.separator + resource.getFilename());
                     boolean isCreateFile = file.createNewFile();
-                    StaticLog.info("a new file is created [{}] for {}", isCreateFile, currentDate);
+                    StaticLog.info("a new file is created [yes or no? -->{}] for {}", isCreateFile, currentDate);
                 } else {
                     // 创建目录
                     boolean isMkDirs = dir.mkdirs();
-                    StaticLog.info("a new directory is created [{}].", isMkDirs);
+                    StaticLog.info("a new directory is created [yes or no? -->{}].", isMkDirs);
                 }
                 return;
             }
