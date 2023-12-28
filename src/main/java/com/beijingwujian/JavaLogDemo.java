@@ -59,7 +59,7 @@ public class JavaLogDemo {
         ClassPathResource resource = new ClassPathResource("/log/" + currentDate + ".md");
         try {
             if (!resource.exists()) {
-                StaticLog.info("MD file doesn't exist, start to create it.");
+                StaticLog.info("file doesn't exist, start to create it.");
                 File dir = new File(filePath);
                 if (dir.isDirectory()) {
                     // 如果是已存在的目录，则直接在该目录下创建日志文件
