@@ -38,6 +38,8 @@ public class JavaLogDemo {
     /**
      * 主函数，每天执行它
      *
+     * TODO 生成和写的日志文件里的内容所有人都可见，考虑加密日志内容，做到只有运行main程序才能看到，其它情况下，只能看到加密后的密文
+     *
      * @param args 参数
      */
     public static void main(String[] args) {
