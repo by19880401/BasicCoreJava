@@ -47,7 +47,7 @@ public class JavaLogDemo {
             StaticLog.warn("filePath is not configured for {} in {}", SystemUtils.getOsName(), APPLICATION_YAML);
             return;
         }
-        StaticLog.info("current filePath: {}", filePath);// TODO windows测试通过，
+        StaticLog.info("current filePath: {}", filePath);// TODO windows测试通过，Mac OS测试通过，
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
         // 把当前时间作为参数，获取当天的日志markdown文件

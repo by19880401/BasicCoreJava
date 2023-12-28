@@ -8,3 +8,8 @@ com.example: common demos
 com.szewec: the demos where I'm working on SZEWEC
 com.xxx: the demos where I'm working on xxx
                                                                          --Willis Bai （白杨）
+
+
+## 测试结果
+# 路径：com/beijingwujian/JavaLogDemo.java
+![img.png](img.png)
