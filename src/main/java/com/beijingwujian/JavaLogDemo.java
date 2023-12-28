@@ -3,6 +3,7 @@ package com.beijingwujian;
 import cn.hutool.log.StaticLog;
 import com.common.CastUtils;
 import com.common.SystemUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.config.YamlMapFactoryBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.CollectionUtils;
@@ -19,6 +20,8 @@ import java.util.Map;
 
 public class JavaLogDemo {
 
+    private static final String APPLICATION_YAML = "application.yml";
+
     // 日志文件路径
     private static String filePath = "";
 
@@ -26,26 +29,10 @@ public class JavaLogDemo {
     static {
         // 读取yaml文件配置
         YamlMapFactoryBean yamlMapFactoryBean = new YamlMapFactoryBean();
-        yamlMapFactoryBean.setResources(new ClassPathResource("application.yml"));
+        yamlMapFactoryBean.setResources(new ClassPathResource(APPLICATION_YAML));
         // 通过getObject()方法获取Map对象
         Map<String, Object> yamlMap = yamlMapFactoryBean.getObject();
-        if (!CollectionUtils.isEmpty(yamlMap)) {
-            yamlMap.keySet().forEach(item -> {
-                // 可以将map中的值强转为LinkedHashMap对象
-                LinkedHashMap<String, Object> linkedHashMap = CastUtils.cast(yamlMap.get(item));
-                if (SystemUtils.isWindows()) {
-                    StaticLog.info("It's running on Windows OS");
-                    filePath = (String) linkedHashMap.get("windows.filePath");
-                } else if (SystemUtils.isMacOs()) {
-                    StaticLog.info("It's running on Mac OS");
-                    filePath = (String) linkedHashMap.get("macOs.filepath");
-                } else {
-                    // unix or linux
-                    StaticLog.info("It's running on Linux or Unix OS");
-                    filePath = (String) linkedHashMap.get("linux.filepath");
-                }
-            });
-        }
+        readFilePathInYAML(yamlMap);
     }
 
     /**
@@ -54,6 +41,10 @@ public class JavaLogDemo {
      * @param args 参数
      */
     public static void main(String[] args) {
+        if (!isFilePathConfiguredInYAML()) {
+            StaticLog.warn("filePath is not configured for {} in {}", SystemUtils.getOsName(), APPLICATION_YAML);
+            return;
+        }
         StaticLog.info("current filePath: {}", filePath);// TODO windows测试通过，
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
@@ -92,6 +83,15 @@ public class JavaLogDemo {
     }
 
     /**
+     * 判断yaml文件里是否配置了指定系统下的日志目录
+     *
+     * @return true: it's configured; false, it's not configured
+     */
+    private static boolean isFilePathConfiguredInYAML() {
+        return StringUtils.isBlank(filePath) ? false : true;
+    }
+
+    /**
      * 格式化（当前）时间
      *
      * @return 返回string类型的结果，如果2023-12-21
@@ -99,5 +99,28 @@ public class JavaLogDemo {
     private static String getCurrentTimeStr() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return dtf.format(LocalDateTime.now());
+    }
+
+    private static void readFilePathInYAML(Map<String, Object> yamlMap) {
+        if (CollectionUtils.isEmpty(yamlMap)) {
+            StaticLog.warn("no configurations found in {}", APPLICATION_YAML);
+            return;
+        }
+        yamlMap.keySet().forEach(item -> {
+            // 可以将map中的值强转为LinkedHashMap对象
+            LinkedHashMap<String, Object> linkedHashMap = CastUtils.cast(yamlMap.get(item));
+            if (SystemUtils.isWindows()) {
+                StaticLog.info("It's running on Windows OS");
+                filePath = (String) linkedHashMap.get("windows.filePath");
+            } else if (SystemUtils.isMacOs()) {
+                StaticLog.info("It's running on Mac OS");
+                filePath = (String) linkedHashMap.get("macOs.filepath");
+            } else {
+                // unix or linux
+                StaticLog.info("It's running on Linux or Unix OS");
+                filePath = (String) linkedHashMap.get("linux.filepath");
+            }
+        });
+
     }
 }

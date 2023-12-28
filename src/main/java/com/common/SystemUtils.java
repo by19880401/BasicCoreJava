@@ -43,7 +43,7 @@ public class SystemUtils {
      *
      * @return os.name 属性值
      */
-    private static String getOsName() {
+    public static String getOsName() {
         return System.getProperty("os.name");
     }
 }
