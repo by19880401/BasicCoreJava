@@ -48,29 +48,20 @@ public class JavaLogDemo {
             StaticLog.warn("filePath is not configured for {} in {}", SystemUtils.getOsName(), APPLICATION_YAML);
             return;
         }
-        StaticLog.info("current filePath: {}", filePath);// TODO windows测试通过，Mac OS测试通过，
+        StaticLog.info("current filePath: {}", filePath);// TODO windows测试通过，Mac OS测试通过，测试结果见项目README.md
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
         // 把当前时间作为参数，获取当天的日志markdown文件
         ClassPathResource resource = new ClassPathResource("/log/" + currentDate + ".md");
         try {
+            // 如果不存在当天的日志文件，则创建它
             if (!resource.exists()) {
                 StaticLog.info("file doesn't exist, start to create it.");
-                File dir = new File(filePath);
-                if (dir.isDirectory()) {
-                    // 如果是已存在的目录，则直接在该目录下创建日志文件
-                    File file = new File(filePath + File.separator + resource.getFilename());
-                    boolean isCreateFile = file.createNewFile();
-                    StaticLog.info("a new file is created [yes or no? -->{}] for {}", isCreateFile, currentDate);
-                } else {
-                    // 创建目录
-                    boolean isMkDirs = dir.mkdirs();
-                    StaticLog.info("a new directory is created [yes or no? -->{}].", isMkDirs);
-                }
+                createDirectoryOrFile(resource, currentDate);
                 return;
             }
 
-            StaticLog.info("MD file has already exist, read it.");
+            StaticLog.info("file has already exist, read it.");
             // 获取MD文件
             String filePath = resource.getFile().getPath();
             // 读取MD文件
@@ -101,7 +92,7 @@ public class JavaLogDemo {
      * @return true: it's configured; false, it's not configured
      */
     private static boolean isFilePathConfiguredInYAML() {
-        return StringUtils.isBlank(filePath) ? false : true;
+        return !StringUtils.isBlank(filePath);
     }
 
     private static void readFilePathInYAML(Map<String, Object> yamlMap) {
@@ -125,5 +116,26 @@ public class JavaLogDemo {
             }
         });
 
+    }
+
+    /**
+     * 描述：创建目录或者文件本身
+     *
+     * @param resource    在resource下读取的log文件资源
+     * @param currentDate 当前时间
+     * @throws IOException 如果有异常，则抛出它
+     */
+    private static void createDirectoryOrFile(ClassPathResource resource, String currentDate) throws IOException {
+        File dir = new File(filePath);
+        if (dir.isDirectory()) {
+            // 如果是已存在的目录，则直接在该目录下创建日志文件
+            File file = new File(filePath + File.separator + resource.getFilename());
+            boolean isCreateFile = file.createNewFile();
+            StaticLog.info("a new file is created [yes or no? -->{}] for {}", isCreateFile, currentDate);
+        } else {
+            // 创建目录
+            boolean isMkDirs = dir.mkdirs();
+            StaticLog.info("a new directory is created [yes or no? -->{}].", isMkDirs);
+        }
     }
 }
