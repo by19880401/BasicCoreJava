@@ -66,6 +66,11 @@ public class JavaLogDemo {
             String filePath = resource.getFile().getPath();
             // 读取文件
             List<String> lines = Files.readAllLines(Paths.get(filePath));
+            // 如果lines为空，即文件内容为空，则直接退出、提示
+            if (CollectionUtils.isEmpty(lines)) {
+                StaticLog.info("no content found in {}.md file.", currentDate);
+                return;
+            }
             // 一行一行遍历文件内容，打印
             for (String line : lines) {
                 StaticLog.info(line);
