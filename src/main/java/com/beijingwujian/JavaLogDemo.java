@@ -62,9 +62,9 @@ public class JavaLogDemo {
             }
 
             StaticLog.info("file has already exist, read it.");
-            // 获取MD文件
+            // 获取文件
             String filePath = resource.getFile().getPath();
-            // 读取MD文件
+            // 读取文件
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             // 一行一行遍历文件内容，打印
             for (String line : lines) {
