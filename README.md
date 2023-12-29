@@ -10,6 +10,9 @@ com.xxx: the demos where I'm working on xxx
                                                                          --Willis Bai （白杨）
 
 
-## 测试结果
-# 路径：com/beijingwujian/JavaLogDemo.java
+# 测试结果
+## 测试类：com/beijingwujian/JavaLogDemo.java
+### Mac OS Env测试结果：
 ![img.png](img.png)
+### Windows Env测试结果：
+![img_1.png](img_1.png)

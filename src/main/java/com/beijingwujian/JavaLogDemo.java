@@ -43,6 +43,7 @@ public class JavaLogDemo {
      * @param args 参数
      */
     public static void main(String[] args) {
+        // 如果yaml文件内容是空的（没有任何配置），提示，退出程序
         if (!isFilePathConfiguredInYAML()) {
             StaticLog.warn("filePath is not configured for {} in {}", SystemUtils.getOsName(), APPLICATION_YAML);
             return;
@@ -85,15 +86,6 @@ public class JavaLogDemo {
     }
 
     /**
-     * 判断yaml文件里是否配置了指定系统下的日志目录
-     *
-     * @return true: it's configured; false, it's not configured
-     */
-    private static boolean isFilePathConfiguredInYAML() {
-        return StringUtils.isBlank(filePath) ? false : true;
-    }
-
-    /**
      * 格式化（当前）时间
      *
      * @return 返回string类型的结果，如果2023-12-21
@@ -101,6 +93,15 @@ public class JavaLogDemo {
     private static String getCurrentTimeStr() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         return dtf.format(LocalDateTime.now());
+    }
+
+    /**
+     * 判断yaml文件里是否配置了指定系统下的日志目录
+     *
+     * @return true: it's configured; false, it's not configured
+     */
+    private static boolean isFilePathConfiguredInYAML() {
+        return StringUtils.isBlank(filePath) ? false : true;
     }
 
     private static void readFilePathInYAML(Map<String, Object> yamlMap) {
