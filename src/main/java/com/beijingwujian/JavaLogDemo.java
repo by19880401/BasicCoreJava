@@ -21,6 +21,10 @@ import java.util.Map;
 public class JavaLogDemo {
 
     private static final String APPLICATION_YAML = "application.yml";
+    private static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd";
+    private static final String FILE_PATH_FOR_WINDOWS = "windows.filePath";
+    private static final String FILE_PATH_FOR_MAC = "macOs.filepath";
+    private static final String FILE_PATH_FOR_LINUX = "linux.filepath";
 
     // 日志文件路径
     private static String filePath = "";
@@ -87,7 +91,7 @@ public class JavaLogDemo {
      * @return 返回string类型的结果，如果2023-12-21
      */
     private static String getCurrentTimeStr() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN);
         return dtf.format(LocalDateTime.now());
     }
 
@@ -110,14 +114,14 @@ public class JavaLogDemo {
             LinkedHashMap<String, Object> linkedHashMap = CastUtils.cast(yamlMap.get(item));
             if (SystemUtils.isWindows()) {
                 StaticLog.info("It's running on Windows OS");
-                filePath = (String) linkedHashMap.get("windows.filePath");
+                filePath = (String) linkedHashMap.get(FILE_PATH_FOR_WINDOWS);
             } else if (SystemUtils.isMacOs()) {
                 StaticLog.info("It's running on Mac OS");
-                filePath = (String) linkedHashMap.get("macOs.filepath");
+                filePath = (String) linkedHashMap.get(FILE_PATH_FOR_MAC);
             } else {
                 // unix or linux
                 StaticLog.info("It's running on Linux or Unix OS");
-                filePath = (String) linkedHashMap.get("linux.filepath");
+                filePath = (String) linkedHashMap.get(FILE_PATH_FOR_LINUX);
             }
         });
 
@@ -136,11 +140,11 @@ public class JavaLogDemo {
             // 如果是已存在的目录，则直接在该目录下创建日志文件
             File file = new File(filePath + File.separator + resource.getFilename());
             boolean isCreateFile = file.createNewFile();
-            StaticLog.info("a new file is created [yes or no? -->{}] for {}", isCreateFile, currentDate);
+            StaticLog.info("a new file is created for {}? -->{}", currentDate, isCreateFile);
         } else {
             // 创建目录
             boolean isMkDirs = dir.mkdirs();
-            StaticLog.info("a new directory is created [yes or no? -->{}].", isMkDirs);
+            StaticLog.info("a new directory is created? -->{}", isMkDirs);
         }
     }
 }
