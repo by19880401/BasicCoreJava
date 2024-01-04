@@ -72,7 +72,7 @@ public class JavaLogDemo {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             // 如果lines为空，即文件内容为空，则直接退出、提示
             if (CollectionUtils.isEmpty(lines)) {
-                StaticLog.info("no content found in {}.md file.", currentDate);
+                StaticLog.info("no content found in {}.md or .txt file.", currentDate);
                 return;
             }
             // 一行一行遍历文件内容，打印
@@ -140,11 +140,11 @@ public class JavaLogDemo {
             // 如果是已存在的目录，则直接在该目录下创建日志文件
             File file = new File(filePath + File.separator + resource.getFilename());
             boolean isCreateFile = file.createNewFile();
-            StaticLog.info("a new file is created for {}? -->{}", currentDate, isCreateFile);
+            StaticLog.info("a new file is created for {} --> {}", currentDate, isCreateFile);
         } else {
             // 创建目录
             boolean isMkDirs = dir.mkdirs();
-            StaticLog.info("a new directory is created? -->{}", isMkDirs);
+            StaticLog.info("a new directory is created --> {}", isMkDirs);
         }
     }
 }
