@@ -1,4 +1,4 @@
-package com.beijingwujian;
+package com.beijingwujian.lambdagroupby;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.beijingwujian;
+package com.beijingwujian.test;
 
 import cn.hutool.log.StaticLog;
 
