@@ -56,7 +56,7 @@ public class JavaLogDemo {
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
         // 把当前时间作为参数，获取当天的日志markdown文件
-        ClassPathResource resource = new ClassPathResource("/log/" + currentDate + ".txt");
+        ClassPathResource resource = new ClassPathResource("/log/" + currentDate + ".md");
         try {
             // 如果不存在当天的日志文件，则创建它
             if (!resource.exists()) {
@@ -72,7 +72,7 @@ public class JavaLogDemo {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             // 如果lines为空，即文件内容为空，则直接退出、提示
             if (CollectionUtils.isEmpty(lines)) {
-                StaticLog.info("no content found in {}.md or {}.txt file.", currentDate, currentDate);
+                StaticLog.info("no content found in {}.md file.", currentDate);
                 return;
             }
             // 一行一行遍历文件内容，打印
