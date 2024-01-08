@@ -8,7 +8,6 @@ import org.springframework.beans.factory.config.YamlMapFactoryBean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.util.CollectionUtils;
 
-import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
