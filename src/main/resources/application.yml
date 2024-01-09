@@ -4,6 +4,6 @@ log:
     macOs.filepath: /Users/willisbai/GitRepo/BasicCoreJava/src/main/resources/log
     linux.filepath: #TODO
 
-# supported file suffixes
+# supported file suffixes，枚举：.md，.txt，
 file:
     suffix: .md
