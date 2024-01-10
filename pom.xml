@@ -6,13 +6,13 @@
 
     <groupId>BasicCoreJava</groupId>
     <artifactId>com.szewec</artifactId>
-    <version>1.0.0</version>
+    <version>2.0.0</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <name>basic-core-java</name>
-    <description>示例代码</description>
+    <description/>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
