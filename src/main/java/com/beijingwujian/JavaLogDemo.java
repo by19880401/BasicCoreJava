@@ -29,6 +29,8 @@ public class JavaLogDemo {
     // 日志文件路径
     private static String filePath = "";
 
+    private static String fileSuffix = "";
+
     // 静态块读取日志文件路径配置，只读一次
     static {
         // 读取yaml文件配置
@@ -110,21 +112,39 @@ public class JavaLogDemo {
             return;
         }
         yamlMap.keySet().forEach(item -> {
-            // 可以将map中的值强转为LinkedHashMap对象
-            LinkedHashMap<String, Object> linkedHashMap = CastUtils.cast(yamlMap.get(item));
-            if (SystemUtils.isWindows()) {
-                StaticLog.info("It's running on Windows OS");
-                filePath = (String) linkedHashMap.get(FILE_PATH_FOR_WINDOWS);
-            } else if (SystemUtils.isMacOs()) {
-                StaticLog.info("It's running on Mac OS");
-                filePath = (String) linkedHashMap.get(FILE_PATH_FOR_MAC);
-            } else {
-                // unix or linux
-                StaticLog.info("It's running on Linux or Unix OS");
-                filePath = (String) linkedHashMap.get(FILE_PATH_FOR_LINUX);
+            switch (item) {
+                case "log":
+                    handleFilePath(yamlMap, item);
+                    break;
+                case "file":
+                    handleFileSuffix();
+                    break;
+                default:
+                    // default 分支不需要 break 语句
+                    System.out.println("default....");
             }
         });
 
+    }
+
+    private static void handleFilePath(Map<String, Object> yamlMap, String item) {
+        // 可以将map中的值强转为LinkedHashMap对象
+        LinkedHashMap<String, Object> linkedHashMap = CastUtils.cast(yamlMap.get(item));
+        if (SystemUtils.isWindows()) {
+            StaticLog.info("It's running on Windows OS");
+            filePath = (String) linkedHashMap.get(FILE_PATH_FOR_WINDOWS);
+        } else if (SystemUtils.isMacOs()) {
+            StaticLog.info("It's running on Mac OS");
+            filePath = (String) linkedHashMap.get(FILE_PATH_FOR_MAC);
+        } else {
+            // unix or linux
+            StaticLog.info("It's running on Linux or Unix OS");
+            filePath = (String) linkedHashMap.get(FILE_PATH_FOR_LINUX);
+        }
+    }
+
+    private static void handleFileSuffix() {
+        StaticLog.info("处理文件后缀的问题");
     }
 
     /**

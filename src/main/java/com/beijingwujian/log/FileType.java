@@ -12,4 +12,6 @@ public enum FileType {
     MARKDOWN(".md"), TEXT(".txt");
 
     private final String suffix;//拿掉setter，直接暴露属性，将属性改成final确保不会被篡改
+
+
 }
