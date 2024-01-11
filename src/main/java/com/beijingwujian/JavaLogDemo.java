@@ -23,13 +23,13 @@ public class JavaLogDemo {
     private static final String APPLICATION_YAML = "application.yml";
     private static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd";
     private static final String FILE_PATH_FOR_WINDOWS = "windows.filePath";
+    private static final String CONFIG_TYPE_FILE_IN_YAML = "file";
+    private static final String CONFIG_TYPE_LOG_IN_YAML = "log";
     private static final String FILE_PATH_FOR_MAC = "macOs.filepath";
     private static final String FILE_PATH_FOR_LINUX = "linux.filepath";
 
     // 日志文件路径
     private static String filePath = "";
-
-    private static String fileSuffix = "";
 
     // 静态块读取日志文件路径配置，只读一次
     static {
@@ -113,10 +113,10 @@ public class JavaLogDemo {
         }
         yamlMap.keySet().forEach(item -> {
             switch (item) {
-                case "log":
+                case CONFIG_TYPE_LOG_IN_YAML:
                     handleFilePath(yamlMap, item);
                     break;
-                case "file":
+                case CONFIG_TYPE_FILE_IN_YAML:
                     handleFileSuffix();
                     break;
                 default:

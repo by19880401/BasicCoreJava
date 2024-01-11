@@ -6,7 +6,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 public enum ConfigType {
-    LOG("log"), FILE("file");//在application.yml里的一级菜单配置
+    LOG("log"), FILE("file");
 
-    private final String configType;
+    private String configType;
 }
