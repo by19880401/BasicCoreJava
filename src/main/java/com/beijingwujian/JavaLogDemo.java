@@ -27,9 +27,11 @@ public class JavaLogDemo {
     private static final String CONFIG_TYPE_LOG_IN_YAML = "log";
     private static final String FILE_PATH_FOR_MAC = "macOs.filepath";
     private static final String FILE_PATH_FOR_LINUX = "linux.filepath";
+    private static final String FILE_SUFFIX = "suffix";
 
     // 日志文件路径
     private static String filePath = "";
+    private static String fileSuffix = "";
 
     // 静态块读取日志文件路径配置，只读一次
     static {
@@ -117,11 +119,12 @@ public class JavaLogDemo {
                     handleFilePath(yamlMap, item);
                     break;
                 case CONFIG_TYPE_FILE_IN_YAML:
-                    handleFileSuffix();
+                    handleFileSuffix(yamlMap, item);
+                    StaticLog.info("File suffix is {}", fileSuffix);
                     break;
                 default:
                     // default 分支不需要 break 语句
-                    System.out.println("default....");
+                    StaticLog.warn("Unsupported suffix...");
             }
         });
 
@@ -143,8 +146,9 @@ public class JavaLogDemo {
         }
     }
 
-    private static void handleFileSuffix() {
-        StaticLog.info("处理文件后缀的问题");
+    private static void handleFileSuffix(Map<String, Object> yamlMap, String item) {
+        LinkedHashMap<String, Object> linkedHashMap = CastUtils.cast(yamlMap.get(item));
+        fileSuffix = (String) linkedHashMap.get(FILE_SUFFIX);
     }
 
     /**
