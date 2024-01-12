@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 public class Application {
-    public static void main(String [] args){
+    public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
 
     @RequestMapping("/index")
     String index() {
-        return "Hello World, it's a demo service.";
+        return "Hello World, it's an amazing demonstration service.";
     }
 }
