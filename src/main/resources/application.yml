@@ -1,3 +1,5 @@
+server:
+    port: 5050
 # log path
 log:
     windows.filePath: D:\local-repos\BasicCoreJava\src\main\resources\log
