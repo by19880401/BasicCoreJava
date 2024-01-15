@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class JavaLogDemo {
 
@@ -124,7 +125,7 @@ public class JavaLogDemo {
                     break;
                 default:
                     // default 分支不需要 break 语句
-                    StaticLog.warn("Unsupported suffix...");
+                    StaticLog.warn("Other configurations are found in {}, ignore...", APPLICATION_YAML);
             }
         });
 

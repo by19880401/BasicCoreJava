@@ -3,10 +3,12 @@
 It seems like a Java tool, normally I will check in some code cases that I met when developing.
 Here we go!
 
-Code Structure:
+## Code Structure
 com.example: common demos
+com.web: web demos
 com.szewec: the demos where I'm working on SZEWEC
-com.xxx: the demos where I'm working on xxx
+com.objectiva: the demos where I'm working on Objectiva/Nagarro
+com.beijingwujian: the demos where I'm working on BJWJ
                                                                          --Willis Bai （白杨）
 
 
