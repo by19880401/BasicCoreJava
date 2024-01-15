@@ -1,11 +1,12 @@
 server:
     port: 5050
-# log path
-log:
-    windows.filePath: D:\local-repos\BasicCoreJava\src\main\resources\log
-    macOs.filepath: /Users/willisbai/GitRepo/BasicCoreJava/src/main/resources/log
-    linux.filepath: #TODO
+# Configurations for JavaLogDemo -->com.beijingwujian.JavaLogDemo
+JavaLogDemo:
+    log:
+        windows.filePath: D:\local-repos\BasicCoreJava\src\main\resources\log
+        macOs.filepath: /Users/willisbai/GitRepo/BasicCoreJava/src/main/resources/log
+        linux.filepath: #TODO
 
 # supported file suffixes，枚举：.md，.txt，.java（根据已提供的代码模板，生成）
-file:
-    suffix: .md
+    file:
+        suffix: .md

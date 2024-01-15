@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class JavaLogDemo {
@@ -110,17 +111,26 @@ public class JavaLogDemo {
     }
 
     private static void readFilePathInYAML(Map<String, Object> yamlMap) {
+        // 如果这是个空的yaml文件，退出程序
         if (CollectionUtils.isEmpty(yamlMap)) {
             StaticLog.warn("no configurations found in {}", APPLICATION_YAML);
             return;
         }
-        yamlMap.keySet().forEach(item -> {
+        // 过滤key为“JavaLogDemo”的配置
+        Map<String, Object> javaLogDemoMap = yamlMap.entrySet().stream().filter(item -> item.getKey().equals("JavaLogDemo")).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        Optional<Object> javaLogDemoMapValue = javaLogDemoMap.values().stream().findFirst();//名为“JavaLogDemo”节点的，仅有此一个，故只取第一个
+        if (!javaLogDemoMapValue.isPresent()) {
+            return;
+        }
+        Map<String, Object> javaLogDemoMapValueMap = CastUtils.cast(javaLogDemoMapValue.get());
+        // 遍历key为“JavaLogDemo”的配置
+        javaLogDemoMapValueMap.keySet().forEach(item -> {
             switch (item) {
                 case CONFIG_TYPE_LOG_IN_YAML:
-                    handleFilePath(yamlMap, item);
+                    handleFilePath(javaLogDemoMapValueMap, item);
                     break;
                 case CONFIG_TYPE_FILE_IN_YAML:
-                    handleFileSuffix(yamlMap, item);
+                    handleFileSuffix(javaLogDemoMapValueMap, item);
                     StaticLog.info("File suffix is {}", fileSuffix);
                     break;
                 default:
