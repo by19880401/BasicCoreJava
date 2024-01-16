@@ -13,15 +13,15 @@ import java.util.Map;
 public class Demo1 {
     private static final String APPLICATION_YAML = "application.yml";
 
+    /**
+     * Result:
+     * 09:39:34.462 [main] DEBUG cn.hutool.log.LogFactory - Use [Slf4j] Logger As Default.
+     * 09:39:34.467 [main] INFO com.beijingwujian.snakeyml.Demo1 - {server={port=5050}, JavaLogDemo={log={windows.filePath=D:\local-repos\BasicCoreJava\src\main\resources\log, macOs.filepath=/Users/willisbai/GitRepo/BasicCoreJava/src/main/resources/log, linux.filepath=null}, file={suffix=.md}}}
+     */
     public static void main(String[] args) {
         Yaml applicationYAML = new Yaml();
-        Map<String, Object> map = applicationYAML.load(new Demo1().getClass().getClassLoader().getResourceAsStream(APPLICATION_YAML));
+        Map<String, Object> map = applicationYAML.load(Demo1.class.getClassLoader().getResourceAsStream(APPLICATION_YAML));
         StaticLog.info("{}", map);
 
-        /**
-         * Result:
-         * 09:39:34.462 [main] DEBUG cn.hutool.log.LogFactory - Use [Slf4j] Logger As Default.
-         * 09:39:34.467 [main] INFO com.beijingwujian.snakeyml.Demo1 - {server={port=5050}, JavaLogDemo={log={windows.filePath=D:\local-repos\BasicCoreJava\src\main\resources\log, macOs.filepath=/Users/willisbai/GitRepo/BasicCoreJava/src/main/resources/log, linux.filepath=null}, file={suffix=.md}}}
-         */
     }
 }

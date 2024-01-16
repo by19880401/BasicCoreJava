@@ -25,7 +25,8 @@ public class JavaLogDemoCase2 {
     static {
         // 读取yaml文件配置，直接赋值给yaml对象，简单干净，缺点是：我需要创建很多的对象来接这些配置值
         Yaml applicationYAML = new Yaml();
-        applicationYaml = applicationYAML.loadAs(new JavaLogDemoCase2().getClass().getClassLoader().getResourceAsStream(APPLICATION_YAML), ApplicationYaml.class);
+//        applicationYaml = applicationYAML.loadAs(new JavaLogDemoCase2().getClass().getClassLoader().getResourceAsStream(APPLICATION_YAML), ApplicationYaml.class);
+        applicationYaml = applicationYAML.loadAs(JavaLogDemoCase2.class.getClassLoader().getResourceAsStream(APPLICATION_YAML), ApplicationYaml.class);
 
     }
 
@@ -44,6 +45,9 @@ public class JavaLogDemoCase2 {
         }
         String windowsPath = applicationYaml.getJavaLogDemo().getLog().getWindows_file_path();
         StaticLog.info("current filePath: {}", windowsPath);
+        // 获取当前时间
+        String currentDate = getCurrentTimeStr();
+        StaticLog.info("current data: {}", currentDate);
         // 接下来的故事，大家都知道了，参考com/beijingwujian/JavaLogDemoCase1.java
     }
 
