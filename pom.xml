@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>BasicCoreJava</groupId>
-    <artifactId>com.szewec</artifactId>
+    <artifactId>com.example</artifactId>
     <version>2.0.0</version>
 
     <properties>
@@ -79,6 +79,13 @@
             <artifactId>easyexcel</artifactId>
             <version>2.2.10</version>
         </dependency>
+        <!-- snakeyaml，主要用于脱离Spring环境的情形下，单独使用，解析ymal文件 -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>2.2</version>
+        </dependency>
+
         <!-- unit test related jar -->
         <dependency>
             <groupId>org.mockito</groupId>

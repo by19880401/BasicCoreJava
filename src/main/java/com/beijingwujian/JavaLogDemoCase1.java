@@ -20,15 +20,20 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class JavaLogDemo {
+/**
+ * 解析yaml文件的方式一
+ * @Date 2024-01-16
+ *
+ */
+public class JavaLogDemoCase1 {
 
     private static final String APPLICATION_YAML = "application.yml";
     private static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd";
-    private static final String FILE_PATH_FOR_WINDOWS = "windows.filePath";
+    private static final String FILE_PATH_FOR_WINDOWS = "windows_file_path";
     private static final String CONFIG_TYPE_FILE_IN_YAML = "file";
     private static final String CONFIG_TYPE_LOG_IN_YAML = "log";
-    private static final String FILE_PATH_FOR_MAC = "macOs.filepath";
-    private static final String FILE_PATH_FOR_LINUX = "linux.filepath";
+    private static final String FILE_PATH_FOR_MAC = "macOs_file_path";
+    private static final String FILE_PATH_FOR_LINUX = "linux_file_path";
     private static final String FILE_SUFFIX = "suffix";
 
     // 日志文件路径
@@ -117,8 +122,8 @@ public class JavaLogDemo {
             return;
         }
         // 过滤key为“JavaLogDemo”的配置
-        Map<String, Object> javaLogDemoMap = yamlMap.entrySet().stream().filter(item -> item.getKey().equals("JavaLogDemo")).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-        Optional<Object> javaLogDemoMapValue = javaLogDemoMap.values().stream().findFirst();//名为“JavaLogDemo”节点的，仅有此一个，故只取第一个
+        Map<String, Object> javaLogDemoMap = yamlMap.entrySet().stream().filter(item -> item.getKey().equals("javaLogDemo")).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        Optional<Object> javaLogDemoMapValue = javaLogDemoMap.values().stream().findFirst();//名为“javaLogDemo”节点的，仅有此一个，故只取第一个
         if (!javaLogDemoMapValue.isPresent()) {
             return;
         }
