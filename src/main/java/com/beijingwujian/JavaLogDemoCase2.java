@@ -68,7 +68,7 @@ public class JavaLogDemoCase2 {
                 return;
             }
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String content = null;
+            String content;
             while ((content = reader.readLine()) != null) {
                 lines.add(content);
             }
