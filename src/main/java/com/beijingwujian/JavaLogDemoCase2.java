@@ -3,10 +3,14 @@ package com.beijingwujian;
 import cn.hutool.log.StaticLog;
 import com.beijingwujian.snakeyml.ApplicationYaml;
 import com.common.SystemUtils;
+import com.google.common.collect.Lists;
+import org.springframework.util.CollectionUtils;
 import org.yaml.snakeyaml.Yaml;
 
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -19,6 +23,9 @@ public class JavaLogDemoCase2 {
     private static final String APPLICATION_YAML = "application.yml";
     private static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd";
     private static final ApplicationYaml applicationYaml;
+
+    // 日志文件路径
+    private static String filePath = "";
 
 
     // 静态块读取日志文件路径配置，只读一次
@@ -43,12 +50,51 @@ public class JavaLogDemoCase2 {
             StaticLog.warn("filePath is not configured for {} in {}", SystemUtils.getOsName(), APPLICATION_YAML);
             return;
         }
-        String windowsPath = applicationYaml.getJavaLogDemo().getLog().getWindows_file_path();
-        StaticLog.info("current filePath: {}", windowsPath);
+        if (SystemUtils.isWindows()) {
+            StaticLog.info("It's running on Windows OS");
+            filePath = applicationYaml.getJavaLogDemo().getLog().getWindows_file_path();
+        } else if (SystemUtils.isMacOs()) {
+            StaticLog.info("It's running on Mac OS");
+            filePath = applicationYaml.getJavaLogDemo().getLog().getMacOs_file_path();
+        } else {
+            // unix or linux
+            StaticLog.info("It's running on Linux or Unix OS");
+            filePath = applicationYaml.getJavaLogDemo().getLog().getLinux_file_path();
+        }
+
+        StaticLog.info("current filePath: {}", filePath);
+
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
-        StaticLog.info("current data: {}", currentDate);
         // 接下来的故事，大家都知道了，参考com/beijingwujian/JavaLogDemoCase1.java
+        // 把当前时间作为参数，获取当天的日志MarkDown文件
+        InputStream inputStream = JavaLogDemoCase2.class.getResourceAsStream("/log/" + currentDate + ".md");
+        try {
+            if (null == inputStream) {
+                StaticLog.info("file doesn't exist, start to create it.");
+                createDirectoryOrFile(currentDate);
+                return;
+            }
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            List<String> lines = Lists.newArrayList();
+            String content;
+            while ((content = reader.readLine()) != null) {
+                lines.add(content);
+            }
+
+            if (CollectionUtils.isEmpty(lines)) {
+                StaticLog.info("no content found in {}.md file.", currentDate);
+                return;
+            }
+            // 一行一行遍历文件内容，打印
+            for (String line : lines) {
+                StaticLog.info(line);
+            }
+
+        } catch (IOException e) {
+            StaticLog.warn("exception: {}", e.getMessage());
+        }
     }
 
     /**
@@ -59,5 +105,19 @@ public class JavaLogDemoCase2 {
     private static String getCurrentTimeStr() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN);
         return dtf.format(LocalDateTime.now());
+    }
+
+    private static void createDirectoryOrFile(String currentDate) throws IOException {
+        File dir = new File(filePath);
+        if (dir.isDirectory()) {
+            // 如果是已存在的目录，则直接在该目录下创建日志文件
+            File file = new File(filePath + File.separator + currentDate + ".md");
+            boolean isCreateFile = file.createNewFile();
+            StaticLog.info("a new file is created for {} --> {}", currentDate, (isCreateFile ? "Yes" : "No"));
+        } else {
+            // 如果filePath不存在，则创建该目录（从父目录一直到子目录，全部创建）
+            boolean isMkDirs = dir.mkdirs();
+            StaticLog.info("a new directory is created --> {}", (isMkDirs ? "Yes" : "No"));
+        }
     }
 }
