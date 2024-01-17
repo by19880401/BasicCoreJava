@@ -67,7 +67,7 @@ public class JavaLogDemoCase1 {
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
         // 把当前时间作为参数，获取当天的日志markdown文件
-        ClassPathResource resource = new ClassPathResource("/log/" + currentDate + "1.md");
+        ClassPathResource resource = new ClassPathResource("/log/" + currentDate + ".md");
         try {
             // 如果不存在当天的日志文件，则创建它
             if (!resource.exists()) {

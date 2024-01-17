@@ -50,50 +50,40 @@ public class JavaLogDemoCase2 {
             StaticLog.warn("filePath is not configured for {} in {}", SystemUtils.getOsName(), APPLICATION_YAML);
             return;
         }
-        if (SystemUtils.isWindows()) {
-            StaticLog.info("It's running on Windows OS");
-            filePath = applicationYaml.getJavaLogDemo().getLog().getWindows_file_path();
-        } else if (SystemUtils.isMacOs()) {
-            StaticLog.info("It's running on Mac OS");
-            filePath = applicationYaml.getJavaLogDemo().getLog().getMacOs_file_path();
-        } else {
-            // unix or linux
-            StaticLog.info("It's running on Linux or Unix OS");
-            filePath = applicationYaml.getJavaLogDemo().getLog().getLinux_file_path();
-        }
 
-        StaticLog.info("current filePath: {}", filePath);
+        findFilePathForDifferentOs();
+
+        StaticLog.info("suffix: {}", applicationYaml.getJavaLogDemo().getFile().getSuffix());
 
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
         // 接下来的故事，大家都知道了，参考com/beijingwujian/JavaLogDemoCase1.java
         // 把当前时间作为参数，获取当天的日志MarkDown文件
         InputStream inputStream = JavaLogDemoCase2.class.getResourceAsStream("/log/" + currentDate + ".md");
+        List<String> lines = Lists.newArrayList();
         try {
             if (null == inputStream) {
                 StaticLog.info("file doesn't exist, start to create it.");
                 createDirectoryOrFile(currentDate);
                 return;
             }
-
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            List<String> lines = Lists.newArrayList();
-            String content;
+            String content = null;
             while ((content = reader.readLine()) != null) {
                 lines.add(content);
             }
 
-            if (CollectionUtils.isEmpty(lines)) {
-                StaticLog.info("no content found in {}.md file.", currentDate);
-                return;
-            }
-            // 一行一行遍历文件内容，打印
-            for (String line : lines) {
-                StaticLog.info(line);
-            }
-
         } catch (IOException e) {
             StaticLog.warn("exception: {}", e.getMessage());
+        }// TODO 此处，InputStream和BufferedReader需要关闭吗？
+
+        if (CollectionUtils.isEmpty(lines)) {
+            StaticLog.info("no content found in {}.md file.", currentDate);
+            return;
+        }
+        // 一行一行遍历文件内容，打印
+        for (String line : lines) {
+            StaticLog.info(line);
         }
     }
 
@@ -119,5 +109,20 @@ public class JavaLogDemoCase2 {
             boolean isMkDirs = dir.mkdirs();
             StaticLog.info("a new directory is created --> {}", (isMkDirs ? "Yes" : "No"));
         }
+    }
+
+    private static void findFilePathForDifferentOs() {
+        if (SystemUtils.isWindows()) {
+            StaticLog.info("It's running on Windows OS");
+            filePath = applicationYaml.getJavaLogDemo().getLog().getWindows_file_path();
+        } else if (SystemUtils.isMacOs()) {
+            StaticLog.info("It's running on Mac OS");
+            filePath = applicationYaml.getJavaLogDemo().getLog().getMacOs_file_path();
+        } else {
+            // unix or linux
+            StaticLog.info("It's running on Linux or Unix OS");
+            filePath = applicationYaml.getJavaLogDemo().getLog().getLinux_file_path();
+        }
+        StaticLog.info("current filePath: {}", filePath);
     }
 }
