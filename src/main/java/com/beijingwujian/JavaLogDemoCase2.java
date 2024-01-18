@@ -67,10 +67,12 @@ public class JavaLogDemoCase2 {
                 createDirectoryOrFile(currentDate);
                 return;
             }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            String content;
-            while ((content = reader.readLine()) != null) {
-                lines.add(content);
+            // 以下是：标准写法; 使用try-with-resources语法糖自动关闭I/O
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                String content;
+                while ((content = reader.readLine()) != null) {
+                    lines.add(content);
+                }
             }
 
         } catch (IOException e) {
