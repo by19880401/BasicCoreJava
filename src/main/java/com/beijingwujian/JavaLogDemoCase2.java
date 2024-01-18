@@ -59,9 +59,8 @@ public class JavaLogDemoCase2 {
         String currentDate = getCurrentTimeStr();
         // 接下来的故事，大家都知道了，参考com/beijingwujian/JavaLogDemoCase1.java
         // 把当前时间作为参数，获取当天的日志MarkDown文件
-        InputStream inputStream = JavaLogDemoCase2.class.getResourceAsStream("/log/" + currentDate + ".md");
         List<String> lines = Lists.newArrayList();
-        try {
+        try (InputStream inputStream = JavaLogDemoCase2.class.getResourceAsStream("/log/" + currentDate + ".md")) {
             if (null == inputStream) {
                 StaticLog.info("file doesn't exist, start to create it.");
                 createDirectoryOrFile(currentDate);
@@ -77,7 +76,7 @@ public class JavaLogDemoCase2 {
 
         } catch (IOException e) {
             StaticLog.warn("exception: {}", e.getMessage());
-        }// TODO 此处，InputStream和BufferedReader需要关闭吗？
+        }
 
         if (CollectionUtils.isEmpty(lines)) {
             StaticLog.info("no content found in {}.md file.", currentDate);
