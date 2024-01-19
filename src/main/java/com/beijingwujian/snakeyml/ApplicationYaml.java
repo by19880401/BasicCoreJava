@@ -6,5 +6,5 @@ import lombok.Data;
 public class ApplicationYaml {
     private TomcatServer server;
 
-    private JavaLogDemo javaLogDemo;
+    private Demonstration demonstration;
 }

@@ -53,7 +53,7 @@ public class JavaLogDemoCase2 {
 
         findFilePathForDifferentOs();
 
-        StaticLog.info("suffix: {}", applicationYaml.getJavaLogDemo().getFile().getSuffix());
+        StaticLog.info("suffix: {}", applicationYaml.getDemonstration().getFile().getSuffix());
 
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
@@ -115,14 +115,14 @@ public class JavaLogDemoCase2 {
     private static void findFilePathForDifferentOs() {
         if (SystemUtils.isWindows()) {
             StaticLog.info("It's running on Windows OS");
-            filePath = applicationYaml.getJavaLogDemo().getLog().getWindows_file_path();
+            filePath = applicationYaml.getDemonstration().getLog().getPath4windows();
         } else if (SystemUtils.isMacOs()) {
             StaticLog.info("It's running on Mac OS");
-            filePath = applicationYaml.getJavaLogDemo().getLog().getMacOs_file_path();
+            filePath = applicationYaml.getDemonstration().getLog().getPath4macos();
         } else {
             // unix or linux
             StaticLog.info("It's running on Linux or Unix OS");
-            filePath = applicationYaml.getJavaLogDemo().getLog().getLinux_file_path();
+            filePath = applicationYaml.getDemonstration().getLog().getPath4linux();
         }
         StaticLog.info("current filePath: {}", filePath);
     }

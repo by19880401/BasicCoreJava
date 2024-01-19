@@ -1,7 +1,11 @@
-package com.beijingwujian.snakeyml;
+package com.web.configuration;
 
 import lombok.Data;
 
+/**
+ * @Author ibaiy
+ * @Date 2024/1/19 14:04
+ **/
 @Data
 public class Log {
     private String path4windows;
