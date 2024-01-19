@@ -79,11 +79,11 @@
             <artifactId>easyexcel</artifactId>
             <version>2.2.10</version>
         </dependency>
-        <!-- snakeyaml，主要用于脱离Spring环境的情形下，单独使用，解析ymal文件 -->
+        <!-- snakeyaml，主要用于脱离Spring环境的情形下，单独使用，解析ymal文件; 如果启动springboot，V2.x会报错，降版本至V1.x -->
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>2.2</version>
+            <version>1.33</version>
         </dependency>
 
         <!-- unit test related jar -->
