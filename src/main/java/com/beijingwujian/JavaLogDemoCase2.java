@@ -16,7 +16,7 @@ import java.util.Objects;
 /**
  * SnakeYml在使用前需要引入依赖，但是同时也可以脱离Spring环境单独使用
  *
- * @Date 2024-01-16
+ * @apiNote  时间：2024-01-16
  */
 public class JavaLogDemoCase2 {
 
