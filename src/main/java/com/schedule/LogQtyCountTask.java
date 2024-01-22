@@ -52,7 +52,7 @@ public class LogQtyCountTask {
             if (fileItem.isFile()) fileNum++;
             if (fileItem.isDirectory()) directoryNum++;
         }
-        StaticLog.info("file num: {}, directory num: {}", fileNum, directoryNum);
+        StaticLog.info("File num: {}, directory num: {}", fileNum, directoryNum);
     }
 
     private String findFilePathForDifferentOS() {
@@ -64,7 +64,7 @@ public class LogQtyCountTask {
         } else {
             filePath = applicationYamlBean.getLog().getPath4linux();
         }
-        StaticLog.info("current filePath: {}", filePath);
+        StaticLog.info("Current filePath: {}", filePath);
         return filePath;
     }
 }
