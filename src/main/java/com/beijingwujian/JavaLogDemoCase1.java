@@ -22,8 +22,8 @@ import java.util.stream.Collectors;
 
 /**
  * 解析yaml文件的方式一
- * @Date 2024-01-16
  *
+ * @Date 2024-01-16
  */
 public class JavaLogDemoCase1 {
 
@@ -60,10 +60,10 @@ public class JavaLogDemoCase1 {
     public static void main(String[] args) {
         // 如果yaml文件内容是空的（没有任何配置），提示，退出程序
         if (!isFilePathConfiguredInYAML()) {
-            StaticLog.warn("filePath is not configured for {} in {}", SystemUtils.getOsName(), APPLICATION_YAML);
+            StaticLog.warn("FilePath is not configured for {} in {}", SystemUtils.getOsName(), APPLICATION_YAML);
             return;
         }
-        StaticLog.info("current filePath: {}", filePath);// TODO windows测试通过，Mac OS测试通过，测试结果见项目README.md
+        StaticLog.info("Current filePath: {}", filePath);// TODO windows测试通过，Mac OS测试通过，测试结果见项目README.md
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
         // 把当前时间作为参数，获取当天的日志markdown文件
@@ -71,19 +71,19 @@ public class JavaLogDemoCase1 {
         try {
             // 如果不存在当天的日志文件，则创建它
             if (!resource.exists()) {
-                StaticLog.info("file doesn't exist, start to create it.");
+                StaticLog.info("File doesn't exist, start to create it.");
                 createDirectoryOrFile(resource, currentDate);
                 return;
             }
 
-            StaticLog.info("file has already exist, read it.");
+            StaticLog.info("File has already exist, read it.");
             // 获取文件
             String filePath = resource.getFile().getPath();
             // 读取文件
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             // 如果lines为空，即文件内容为空，则直接退出、提示
             if (CollectionUtils.isEmpty(lines)) {
-                StaticLog.info("no content found in {}.md file.", currentDate);
+                StaticLog.info("No content found in {}.md file.", currentDate);
                 return;
             }
             // 一行一行遍历文件内容，打印
@@ -92,7 +92,7 @@ public class JavaLogDemoCase1 {
             }
         } catch (IOException e) {
             // 如果发生异常，打印异常信息
-            StaticLog.warn("some errors occur: {}", e.getMessage());
+            StaticLog.warn("Some errors occur: {}", e.getMessage());
         }
     }
 
@@ -118,7 +118,7 @@ public class JavaLogDemoCase1 {
     private static void readFilePathInYAML(Map<String, Object> yamlMap) {
         // 如果这是个空的yaml文件，退出程序
         if (CollectionUtils.isEmpty(yamlMap)) {
-            StaticLog.warn("no configurations found in {}", APPLICATION_YAML);
+            StaticLog.warn("No configurations found in {}", APPLICATION_YAML);
             return;
         }
         // 过滤key为“JavaLogDemo”的配置

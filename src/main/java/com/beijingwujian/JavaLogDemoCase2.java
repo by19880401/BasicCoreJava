@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * 解析yaml文件的方式二
  * SnakeYml在使用前需要引入依赖，但是同时也可以脱离Spring环境单独使用
  *
  * @Date 2024-01-16
@@ -47,13 +48,13 @@ public class JavaLogDemoCase2 {
     public static void main(String[] args) {
         // 如果yaml文件内容是空的（没有任何配置），提示，退出程序
         if (Objects.isNull(applicationYaml)) {
-            StaticLog.warn("filePath is not configured for {} in {}", SystemUtils.getOsName(), APPLICATION_YAML);
+            StaticLog.warn("FilePath is not configured for {} in {}", SystemUtils.getOsName(), APPLICATION_YAML);
             return;
         }
 
         findFilePathForDifferentOs();
 
-        StaticLog.info("suffix: {}", applicationYaml.getDemonstration().getFile().getSuffix());
+        StaticLog.info("File suffix is {}", applicationYaml.getDemonstration().getFile().getSuffix());
 
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
@@ -62,7 +63,7 @@ public class JavaLogDemoCase2 {
         List<String> lines = Lists.newArrayList();
         try (InputStream inputStream = JavaLogDemoCase2.class.getResourceAsStream("/log/" + currentDate + ".md")) {
             if (null == inputStream) {
-                StaticLog.info("file doesn't exist, start to create it.");
+                StaticLog.info("File doesn't exist, start to create it.");
                 createDirectoryOrFile(currentDate);
                 return;
             }
@@ -75,11 +76,11 @@ public class JavaLogDemoCase2 {
             }
 
         } catch (IOException e) {
-            StaticLog.warn("exception: {}", e.getMessage());
+            StaticLog.warn("Exception: {}", e.getMessage());
         }
 
         if (CollectionUtils.isEmpty(lines)) {
-            StaticLog.info("no content found in {}.md file.", currentDate);
+            StaticLog.info("No content found in {}.md file.", currentDate);
             return;
         }
         // 一行一行遍历文件内容，打印
@@ -104,11 +105,11 @@ public class JavaLogDemoCase2 {
             // 如果是已存在的目录，则直接在该目录下创建日志文件
             File file = new File(filePath + File.separator + currentDate + ".md");
             boolean isCreateFile = file.createNewFile();
-            StaticLog.info("a new file is created for {} --> {}", currentDate, (isCreateFile ? "Yes" : "No"));
+            StaticLog.info("A new file is created for {} --> {}", currentDate, (isCreateFile ? "Yes" : "No"));
         } else {
             // 如果filePath不存在，则创建该目录（从父目录一直到子目录，全部创建）
             boolean isMkDirs = dir.mkdirs();
-            StaticLog.info("a new directory is created --> {}", (isMkDirs ? "Yes" : "No"));
+            StaticLog.info("A new directory is created --> {}", (isMkDirs ? "Yes" : "No"));
         }
     }
 
@@ -124,6 +125,6 @@ public class JavaLogDemoCase2 {
             StaticLog.info("It's running on Linux or Unix OS");
             filePath = applicationYaml.getDemonstration().getLog().getPath4linux();
         }
-        StaticLog.info("current filePath: {}", filePath);
+        StaticLog.info("Current filePath: {}", filePath);
     }
 }
