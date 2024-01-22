@@ -17,7 +17,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @RequestMapping("/index")
+    @RequestMapping("/index1")
     String index() {
         return "Hello World, it's an amazing demonstration service.";
     }

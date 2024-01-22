@@ -164,7 +164,11 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
-
+        <!--前端相关-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
     </dependencies>
 
