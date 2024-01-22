@@ -9,6 +9,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * 定时任务：用来统计日志的数量，并在控制台打印
@@ -39,8 +41,7 @@ public class LogQtyCountTask {
         this.schedulerConfiguration = schedulerConfiguration;
     }
 
-    @Scheduled(cron = "*/5 * * * * ?")//每5秒执行一次
-//    @Scheduled(initialDelay = 10000, fixedRate = 10000) //容器启动后,延迟10秒后再执行一次定时器,以后每10秒再执行一次该定时器
+    @Scheduled(cron = "0 0 * * * ?")//每个整点执行一次
     public void countLog() {
         // 检查任务开关是否开启
         if (!isScheduledTaskOpen()) {
@@ -81,12 +82,15 @@ public class LogQtyCountTask {
 
     /**
      * 读取yaml文件中的开关值
+     * Result is:
+     * <p>
+     * 2024-01-22 16:00:00.010 INFO  com.schedule.LogQtyCountTask - The task is: Disabled at 2024-01-22 16:00:00.00
      *
      * @return true: open; false: closed
      */
     private boolean isScheduledTaskOpen() {
         boolean enabled = schedulerConfiguration.getEnableLogQtyCountTask();
-        log.info("The task is: {}", (enabled ? "Enabled" : "Disabled"));
+        log.info("The task is: {} at {}", (enabled ? "Enabled" : "Disabled"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SS").format(LocalDateTime.now()));
         return enabled;
     }
 }
