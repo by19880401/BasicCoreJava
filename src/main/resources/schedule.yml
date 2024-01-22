@@ -1,0 +1,5 @@
+# 是否开启logqtycounttask
+schedule:
+  enable:
+    log-qty-count-task: false
+    archive-history-file-task: true

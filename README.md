@@ -9,7 +9,7 @@ com.web: web demos
 com.szewec: the demos where I'm working on SZEWEC
 com.objectiva: the demos where I'm working on Objectiva/Nagarro
 com.beijingwujian: the demos where I'm working on BJWJ
-                                                                         --Willis Bai （白杨）
+                                                                         --Willis Bai
 
 
 # 测试结果
