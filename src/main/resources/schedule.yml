@@ -1,0 +1,4 @@
+# 是否开启logqtycounttask
+schedule:
+  enable:
+    log-qty-count-task: true
