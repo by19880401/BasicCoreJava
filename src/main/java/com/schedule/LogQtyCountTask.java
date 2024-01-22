@@ -90,6 +90,7 @@ public class LogQtyCountTask {
      */
     private boolean isScheduledTaskOpen() {
         boolean enabled = schedulerConfiguration.getEnableLogQtyCountTask();
+        // HH：代表24小时制的小时，hh：代表12小时制的小时
         log.info("The task is: {} at {}", (enabled ? "Enabled" : "Disabled"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SS").format(LocalDateTime.now()));
         return enabled;
     }

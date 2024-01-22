@@ -5,9 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 /**
  * 定时任务，每天执行一次，对历史日志文件归档
  * <p>
@@ -32,15 +29,14 @@ public class ArchiveHistoryFileTask {
         if (!isScheduledTaskOpen()) {
             return;
         }
-        // HH：代表24小时制的小时，hh：代表12小时制的小时
+
         log.info("Task is running.");
     }
 
     /**
-     * 2024-01-22 16:00:00.001 INFO  com.schedule.LogQtyCountTask -
-     * 2024-01-22 16:00:00.010 INFO  com.schedule.LogQtyCountTask - The task is: Disabled at 2024-01-22 16:00:00.00
+     * 任务是否开启
      *
-     * @return
+     * @return true: open; false: closed
      */
     private boolean isScheduledTaskOpen() {
         boolean enabled = schedulerConfiguration.isEnableArchiveHistoryFileTask();
