@@ -20,4 +20,4 @@ com.beijingwujian: the demos where I'm working on BJWJ
 ![img_1.png](img_1.png)
 
 ## 作为SpringBoot项目运行，访问链接：http://localhost:5050/index ，测试结果如下：
-![img_2.png](img_2.png)
+![img_3.png](img_3.png)

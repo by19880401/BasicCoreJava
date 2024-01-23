@@ -1,0 +1,12 @@
+#### Configurations for demonstration -->com.beijingwujian.JavaLogDemo####Start####
+# ！！！重要：定义的属性必须全部小写，不允许驼峰形式，不允许file-path形式
+demonstration:
+  log:
+    path4windows: D:\local-repos\BasicCoreJava\src\main\resources\log
+    path4macos: /Users/willisbai/GitRepo/BasicCoreJava/src/main/resources/log
+    path4linux: #TODO
+
+  # supported file suffixes，枚举：.md，.txt，.java（根据已提供的代码模板，生成）
+  file:
+    suffix: .md
+#### Configurations for JavaLogDemo -->com.beijingwujian.JavaLogDemo####End####

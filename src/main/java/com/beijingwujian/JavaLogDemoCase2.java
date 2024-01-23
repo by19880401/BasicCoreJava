@@ -1,9 +1,9 @@
 package com.beijingwujian;
 
-import cn.hutool.log.StaticLog;
 import com.beijingwujian.snakeyml.ApplicationYaml;
 import com.common.SystemUtils;
 import com.google.common.collect.Lists;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 import org.yaml.snakeyaml.Yaml;
 
@@ -17,11 +17,12 @@ import java.util.Objects;
  * 解析yaml文件的方式二
  * SnakeYml在使用前需要引入依赖，但是同时也可以脱离Spring环境单独使用
  *
- * @apiNote  时间：2024-01-16
+ * @apiNote 时间：2024-01-16
  */
+@Slf4j
 public class JavaLogDemoCase2 {
 
-    private static final String APPLICATION_YAML = "application.yml";
+    private static final String APPLICATION_YAML = "java-log-demo-case.yml";
     private static final String DATE_FORMAT_PATTERN = "yyyy-MM-dd";
     private static final ApplicationYaml applicationYaml;
 
@@ -35,7 +36,7 @@ public class JavaLogDemoCase2 {
         Yaml applicationYAML = new Yaml();
 //        applicationYaml = applicationYAML.loadAs(new JavaLogDemoCase2().getClass().getClassLoader().getResourceAsStream(APPLICATION_YAML), ApplicationYaml.class);
         applicationYaml = applicationYAML.loadAs(JavaLogDemoCase2.class.getClassLoader().getResourceAsStream(APPLICATION_YAML), ApplicationYaml.class);
-
+        log.info("Configurations({}) is done.", APPLICATION_YAML);
     }
 
     /**
@@ -48,13 +49,13 @@ public class JavaLogDemoCase2 {
     public static void main(String[] args) {
         // 如果yaml文件内容是空的（没有任何配置），提示，退出程序
         if (Objects.isNull(applicationYaml)) {
-            StaticLog.warn("FilePath is not configured for {} in {}", SystemUtils.getOsName(), APPLICATION_YAML);
+            log.warn("FilePath is not configured for {} in {}", SystemUtils.getOsName(), APPLICATION_YAML);
             return;
         }
 
         findFilePathForDifferentOs();
 
-        StaticLog.info("File suffix is {}", applicationYaml.getDemonstration().getFile().getSuffix());
+        log.info("File suffix is {}", applicationYaml.getDemonstration().getFile().getSuffix());
 
         // 获取当前时间
         String currentDate = getCurrentTimeStr();
@@ -63,7 +64,7 @@ public class JavaLogDemoCase2 {
         List<String> lines = Lists.newArrayList();
         try (InputStream inputStream = JavaLogDemoCase2.class.getResourceAsStream("/log/" + currentDate + ".md")) {
             if (null == inputStream) {
-                StaticLog.info("File doesn't exist, start to create it.");
+                log.info("File doesn't exist, start to create it.");
                 createDirectoryOrFile(currentDate);
                 return;
             }
@@ -76,16 +77,16 @@ public class JavaLogDemoCase2 {
             }
 
         } catch (IOException e) {
-            StaticLog.warn("Exception: {}", e.getMessage());
+            log.warn("Exception: {}", e.getMessage());
         }
 
         if (CollectionUtils.isEmpty(lines)) {
-            StaticLog.info("No content found in {}.md file.", currentDate);
+            log.info("No content found in {}.md file.", currentDate);
             return;
         }
         // 一行一行遍历文件内容，打印
         for (String line : lines) {
-            StaticLog.info(line);
+            log.info(line);
         }
     }
 
@@ -105,26 +106,26 @@ public class JavaLogDemoCase2 {
             // 如果是已存在的目录，则直接在该目录下创建日志文件
             File file = new File(filePath + File.separator + currentDate + ".md");
             boolean isCreateFile = file.createNewFile();
-            StaticLog.info("A new file is created for {} --> {}", currentDate, (isCreateFile ? "Yes" : "No"));
+            log.info("A new file is created for {} --> {}", currentDate, (isCreateFile ? "Yes" : "No"));
         } else {
             // 如果filePath不存在，则创建该目录（从父目录一直到子目录，全部创建）
             boolean isMkDirs = dir.mkdirs();
-            StaticLog.info("A new directory is created --> {}", (isMkDirs ? "Yes" : "No"));
+            log.info("A new directory is created --> {}", (isMkDirs ? "Yes" : "No"));
         }
     }
 
     private static void findFilePathForDifferentOs() {
         if (SystemUtils.isWindows()) {
-            StaticLog.info("It's running on Windows OS");
+            log.info("It's running on Windows OS");
             filePath = applicationYaml.getDemonstration().getLog().getPath4windows();
         } else if (SystemUtils.isMacOs()) {
-            StaticLog.info("It's running on Mac OS");
+            log.info("It's running on Mac OS");
             filePath = applicationYaml.getDemonstration().getLog().getPath4macos();
         } else {
             // unix or linux
-            StaticLog.info("It's running on Linux or Unix OS");
+            log.info("It's running on Linux or Unix OS");
             filePath = applicationYaml.getDemonstration().getLog().getPath4linux();
         }
-        StaticLog.info("Current filePath: {}", filePath);
+        log.info("Current filePath: {}", filePath);
     }
 }
