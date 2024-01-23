@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面</title>
+    <meta name="Willis's Welcome Page" content="Welcome Willis，我在中国 大西安">
+</head>
+<body>
+<h1>Welcome，<span th:text="${user.getUserName()}"></span></h1>
+<p>This is amazing Page.</p>
+<p>We are success</p>
+<h2>**Following用户详细信息使用thymeleaf模板引擎**</h2>
+编号：<span th:text="${user.getId()}"></span><br/>
+姓名：<span th:text="${user.getUserName()}"></span><br/>
+年龄：<span th:text="${user.getAge()}"></span><br/>
+角色：<span th:text="${user.getRole()}"></span><br/>
+描述：<span th:text="${user.getDescription()}"></span><br/>
+</body>
+</html>

@@ -5,3 +5,14 @@ server:
 # 是否开启定时任务
 enable:
     scheduling: true
+
+spring:
+    thymeleaf:
+        prefix: classpath:/template/view/
+        suffix: .html
+        mode: HTML # HTML:Thymeleaf检查html格式很严格; LEGACYHTML5：不严格检查html语法
+        encoding: UTF-8
+        servlet:
+            content-type: text/html
+        # 为便于测试，在开发时需要关闭缓存
+        cache: false
