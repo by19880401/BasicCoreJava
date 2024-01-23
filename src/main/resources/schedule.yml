@@ -1,3 +1,4 @@
+## 以下配置生效的前提：application.yml中设置enable.scheduling = true，开启定时任务 ##
 # 是否开启logqtycounttask
 schedule:
   enable:
