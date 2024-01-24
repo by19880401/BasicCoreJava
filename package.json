@@ -1,0 +1,14 @@
+{
+  "name": "basiccorejava",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://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@github.com/by19880401/BasicCoreJava.git"
+  },
+  "private": true
+}

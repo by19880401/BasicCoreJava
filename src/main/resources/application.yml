@@ -8,7 +8,7 @@ enable:
 
 spring:
     thymeleaf:
-        prefix: classpath:/template/view/
+        prefix: classpath:/template/view
         suffix: .html
         mode: HTML # HTML:Thymeleaf检查html格式很严格; LEGACYHTML5：不严格检查html语法
         encoding: UTF-8

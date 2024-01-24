@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class DefaultController {
 
-    @RequestMapping(value = "/toPage", method = RequestMethod.GET)
+    @RequestMapping(value = "/dispatch", method = RequestMethod.GET)
     public String toPage(HttpServletRequest request, HttpServletResponse response) {
         String url = request.getParameter("url");
         log.info("url: {}", url);
