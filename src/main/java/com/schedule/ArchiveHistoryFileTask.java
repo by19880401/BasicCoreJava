@@ -1,5 +1,6 @@
 package com.schedule;
 
+import com.common.DateTimeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,14 +24,14 @@ public class ArchiveHistoryFileTask {
         this.schedulerConfiguration = schedulerConfiguration;
     }
 
-    @Scheduled(initialDelay = 5000, fixedRate = 1000) //容器启动后,延迟5秒后再执行一次定时器,以后每1秒再执行一次该定时器
+    @Scheduled(initialDelay = 5000, fixedRate = 30000) //容器启动后,延迟5秒后再执行一次定时器,以后每30秒再执行一次该定时器
     public void archiveHistoryFile() {
         // 检查任务开关是否开启
         if (!isScheduledTaskOpen()) {
             return;
         }
 
-        log.info("Task is running.");
+        log.info("Task is running at {}", DateTimeUtils.INSTANCE.formatCurrentDateTime());
     }
 
     /**
