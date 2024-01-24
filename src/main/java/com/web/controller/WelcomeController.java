@@ -24,6 +24,6 @@ public class WelcomeController {
         account.setDescription("这是一个测试页面！！");
         // 把用户信息保存在Model对象中
         model.addAttribute("user", account);
-        return "welcome";
+        return "/welcome";
     }
 }
