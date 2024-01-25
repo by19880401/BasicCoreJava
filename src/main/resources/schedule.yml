@@ -3,4 +3,4 @@
 schedule:
   enable:
     log-qty-count-task: false
-    archive-history-file-task: true
+    archive-history-file-task: false

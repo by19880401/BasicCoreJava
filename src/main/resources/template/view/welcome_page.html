@@ -3,8 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>It's a page</title>
+    <script type="text/javascript" src="../../static/js/jquery-3.7.1.js" charset="UTF-8"></script>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
 </head>
 <body>
-<h1>Page, not from a controller</h1>
+<h1>下面有一个按钮，轻点一下，发个请求，试试手气！！</h1>
+<button id="post_btn" onclick="onClickEvent02();">I'm a Button</button>
+<script>
+    const onClickEvent01 = ()=>{
+        fetch("http://localhost:5050/welcome").then(response=>{
+            console.log(response);//原生fetch，Pass，可行
+        });
+    }
+    console.log(window);
+
+    const onClickEvent02 = ()=>{
+        $.ajax({url:"/welcome",type:"get",async:true, success:function (data){
+            if(data != null){
+                const response = JSON.parse(data);
+                alert(response);
+            }
+            }})
+    }
+</script>
 </body>
 </html>
