@@ -1,6 +1,8 @@
 package com.schedule;
 
 import com.common.DateTimeUtils;
+import com.common.SystemUtils;
+import com.web.configuration.ApplicationYamlBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,6 +19,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class ArchiveHistoryFileTask {
 
+    private ApplicationYamlBean applicationYamlBean;
+
+    @Autowired
+    public void setApplicationYamlBean(ApplicationYamlBean applicationYamlBean) {
+        this.applicationYamlBean = applicationYamlBean;
+    }
+
     private SchedulerConfiguration schedulerConfiguration;
 
     @Autowired
@@ -30,8 +39,23 @@ public class ArchiveHistoryFileTask {
         if (!isScheduledTaskOpen()) {
             return;
         }
-
         log.info("Task is running at {}", DateTimeUtils.INSTANCE.formatCurrentDateTime());
+        String filePath = findFilePathForDifferentOS();
+        log.info("FilePath: {}", filePath);
+
+    }
+
+    public String findFilePathForDifferentOS() {
+        String filePath;
+        if (SystemUtils.isWindows()) {
+            filePath = applicationYamlBean.getLog().getPath4windows();
+        } else if (SystemUtils.isMacOs()) {
+            filePath = applicationYamlBean.getLog().getPath4macos();
+        } else {
+            filePath = applicationYamlBean.getLog().getPath4linux();
+        }
+        log.info("Current filePath: {}", filePath);
+        return filePath;
     }
 
     /**

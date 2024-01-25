@@ -20,15 +20,14 @@ import java.io.File;
 @Slf4j
 @Component //此处，必须有@Component注解，否则无法使用@Autowired注解
 public class LogQtyCountTask {
-
     // 获取yaml文件内容之方法一（如下，可行）
     /*@Value("${enable.logqtycounttask}")
     private Boolean enableTask;*/
 
     // 获取yaml文件内容之方法二（如下，可行）,官方推荐
-    private ApplicationYamlBean applicationYamlBean;
-
     private SchedulerConfiguration schedulerConfiguration;
+
+    private ApplicationYamlBean applicationYamlBean;
 
     @Autowired
     public void setApplicationYamlBean(ApplicationYamlBean applicationYamlBean) {
@@ -66,7 +65,7 @@ public class LogQtyCountTask {
         log.info("File num: {}, directory num: {}", fileNum, directoryNum);
     }
 
-    private String findFilePathForDifferentOS() {
+    public String findFilePathForDifferentOS() {
         String filePath;
         if (SystemUtils.isWindows()) {
             filePath = applicationYamlBean.getLog().getPath4windows();
