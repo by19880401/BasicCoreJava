@@ -4,7 +4,7 @@ server:
 
 # 是否开启定时任务
 enable:
-    scheduling: false
+    scheduling: true
 
 spring:
     thymeleaf:
@@ -16,3 +16,7 @@ spring:
             content-type: text/html
         # 为便于测试，在开发时需要关闭缓存
         cache: false
+    # 集成redis
+    redis:
+        host: 127.0.0.1
+        port: 6379

@@ -1,10 +1,9 @@
 package com.schedule;
 
 import com.common.DateTimeUtils;
-import com.common.SystemUtils;
-import com.web.configuration.ApplicationYamlBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -19,18 +18,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class ArchiveHistoryFileTask {
 
-    private ApplicationYamlBean applicationYamlBean;
-
-    @Autowired
-    public void setApplicationYamlBean(ApplicationYamlBean applicationYamlBean) {
-        this.applicationYamlBean = applicationYamlBean;
-    }
+    private RedisTemplate<String, Object> redisTemplate;
 
     private SchedulerConfiguration schedulerConfiguration;
 
     @Autowired
     public void setSchedulerConfiguration(SchedulerConfiguration schedulerConfiguration) {
         this.schedulerConfiguration = schedulerConfiguration;
+    }
+
+    @Autowired
+    public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
+        this.redisTemplate = redisTemplate;
     }
 
     @Scheduled(initialDelay = 5000, fixedRate = 30000) //容器启动后,延迟5秒后再执行一次定时器,以后每30秒再执行一次该定时器
@@ -40,22 +39,11 @@ public class ArchiveHistoryFileTask {
             return;
         }
         log.info("Task is running at {}", DateTimeUtils.INSTANCE.formatCurrentDateTime());
-        String filePath = findFilePathForDifferentOS();
-        log.info("FilePath: {}", filePath);
+        // ******redis测试代码****测试完成即删除******
+        redisTemplate.opsForValue().set("Willis", "OMG...");
 
-    }
+        redisTemplate.opsForValue().get("Willis");
 
-    public String findFilePathForDifferentOS() {
-        String filePath;
-        if (SystemUtils.isWindows()) {
-            filePath = applicationYamlBean.getLog().getPath4windows();
-        } else if (SystemUtils.isMacOs()) {
-            filePath = applicationYamlBean.getLog().getPath4macos();
-        } else {
-            filePath = applicationYamlBean.getLog().getPath4linux();
-        }
-        log.info("Current filePath: {}", filePath);
-        return filePath;
     }
 
     /**
