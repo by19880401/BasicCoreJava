@@ -20,8 +20,7 @@
     const onClickEvent02 = ()=>{
         $.ajax({url:"/welcome",type:"get",async:true, success:function (data){
             if(data != null){
-                const response = JSON.parse(data);
-                alert(response);
+                alert(data.toString());
             }
             }})
     }
