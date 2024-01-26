@@ -3,26 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>It's a page</title>
-    <script type="text/javascript" src="../../static/js/jquery-3.7.1.js" charset="UTF-8"></script>
-    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://unpkg.com/jquery@3.7.1/dist/jquery.js"></script>
 </head>
 <body>
 <h1>下面有一个按钮，轻点一下，发个请求，试试手气！！</h1>
 <button id="post_btn" onclick="onClickEvent02();">I'm a Button</button>
+<div id="myDiv">No data now.</div>
 <script>
-    const onClickEvent01 = ()=>{
-        fetch("http://localhost:5050/welcome").then(response=>{
+    const onClickEvent01 = () => {
+        fetch("http://localhost:5050/welcome").then(response => {
             console.log(response);//原生fetch，Pass，可行
         });
     }
     console.log(window);
 
-    const onClickEvent02 = ()=>{
-        $.ajax({url:"/welcome",type:"get",async:true, success:function (data){
-            if(data != null){
-                alert(data.toString());
+    // jQuery，Pass，可行
+    const onClickEvent02 = () => {
+        $.ajax({
+            url: "/welcome",
+            type: "get",
+            async: true,
+            beforeSend: function (xhr) {
+                // 在所有发送请求的操作（open, send）之前执行
+                console.log("beforeSend", xhr);
+            },
+            success: function (data) {
+                // 只有请求成功（状态码为200）才会执行这个函数
+                $("#myDiv").html(data);
+                console.log("success");
+
+            },
+            error: function (xhr) {
+                // 只有请求不正常（状态码不为200）才会执行
+                console.log("error", xhr);
+            },
+            complete: function (xhr) {
+                // 不管是成功还是失败都是完成，都会执行这个 complete 函数(一般成功与失败都需要执行的操作写在这里)
+                $("#post_btn").html("complete");
             }
-            }})
+        })
     }
 </script>
 </body>
