@@ -21,10 +21,19 @@
 <div id="app"></div>
 <script type="text/babel">
     class MyComponent extends React.Component {
+        constructor(props) {
+            super(props)
+            // react state
+            this.state = {
+                data: {} || ""
+            }
+        }
+
         handleClick = () => {
             axios.get("http://localhost:5050/welcome").then(res => {
                 if (res.status === 200) {
                     antd.message.success("success to get the data from system backend!");
+                    this.setState({data: res.data});
                     console.log(res.data);
                 }
             }).catch(error => {
@@ -34,9 +43,10 @@
         }
 
         render() {
+            const {data} = this.state;
             return (<antd.Space>
                 <antd.Button type="primary" onClick={this.handleClick}>Primary</antd.Button>
-                <div id="myDiv">no data</div>
+                <div dangerouslySetInnerHTML={{__html: data}}></div>
             </antd.Space>);
         }
     }
