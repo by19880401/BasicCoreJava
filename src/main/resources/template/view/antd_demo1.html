@@ -1,11 +1,11 @@
 <!DOCTYPE html>
+<!--suppress JSXUnresolvedComponent 忽略antd拼写标签报错-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Antd Demo1</title>
     <!--引入antd ui以及reactjs
     https://cdnjs.com/
-
     1.首先需要引入相关JS类库，因为类库之间有依赖关系，不要改变顺序。
     2.编写 text/babel 代码，使用antd组件需要加上antd前缀. 才能正常使用。-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
@@ -23,7 +23,7 @@
     class MyComponent extends React.Component {
         constructor(props) {
             super(props)
-            // react state
+            // react state的正确写法，亲测，可行
             this.state = {
                 data: {} || ""
             }
@@ -37,17 +37,18 @@
                     console.log(res.data);
                 }
             }).catch(error => {
-                antd.message.error("error occurs.");
+                antd.message.error("error occurs.", error);
             })
 
         }
 
         render() {
             const {data} = this.state;
-            return (<antd.Space>
-                <antd.Button type="primary" onClick={this.handleClick}>Primary</antd.Button>
-                <div dangerouslySetInnerHTML={{__html: data}}></div>
-            </antd.Space>);
+            return (
+                <antd.Space>
+                    <antd.Button type="primary" onClick={this.handleClick}>Primary</antd.Button>
+                    <div dangerouslySetInnerHTML={{__html: data}}></div>
+                </antd.Space>);
         }
     }
 
