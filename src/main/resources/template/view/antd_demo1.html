@@ -10,6 +10,7 @@
     2.编写 text/babel 代码，使用antd组件需要加上antd前缀. 才能正常使用。-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.19.3/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.15/antd.min.css"/>
@@ -19,6 +20,10 @@
 </head>
 <body>
 <div id="app"></div>
+<!--<script type="module">
+    import {ReactInnerHTMLByWillis} from "../../static/components/ReactInnerHTMLByWillis";
+    console.dir(ReactInnerHTMLByWillis);
+</script>-->
 <script type="text/babel">
     class MyComponent extends React.Component {
         constructor(props) {
@@ -30,6 +35,7 @@
             }
         }
 
+        // setTimeout是一个定时器，以本例举例说明，行为：5秒后，执行左侧花括号{}里的动作
         handleClick = () => {
             this.setState({loading: true});
             setTimeout(() => {
@@ -45,12 +51,12 @@
         }
 
         // <!--下图<antd>标签等于<></>标签-->
+        // line61 <ReactInnerHTMLByWillis htmlContent={data}></ReactInnerHTMLByWillis>
         render() {
             const {loading, data} = this.state;
             return (
                 <antd>
-                    <antd.Button type="dashed" onClick={this.handleClick} danger loading={loading}>加载HTML
-                    </antd.Button>
+                    <antd.Button type="dashed" onClick={this.handleClick} danger loading={loading}>加载HTML</antd.Button>
                     <antd.Divider type="vertical"/>
                     <div dangerouslySetInnerHTML={{__html: data}}></div>
                 </antd>)
@@ -60,6 +66,5 @@
 
     ReactDOM.render(<MyComponent/>, document.getElementById("app"));
 </script>
-
 </body>
 </html>
