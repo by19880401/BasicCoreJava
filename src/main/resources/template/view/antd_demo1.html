@@ -12,8 +12,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.19.3/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.23.4/antd.min.css"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.23.4/antd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.15/antd.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.24.15/antd.min.js"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
 </head>
@@ -25,30 +25,36 @@
             super(props)
             // react state的正确写法，亲测，可行
             this.state = {
+                loading: false,
                 data: {} || ""
             }
         }
 
         handleClick = () => {
-            axios.get("http://localhost:5050/welcome").then(res => {
-                if (res.status === 200) {
-                    antd.message.success("success to get the data from system backend!");
-                    this.setState({data: res.data});
-                    console.log(res.data);
-                }
-            }).catch(error => {
-                antd.message.error("error occurs.", error);
-            })
-
+            this.setState({loading: true});
+            setTimeout(() => {
+                axios.get("http://localhost:5050/welcome").then(res => {
+                    if (res.status === 200) {
+                        antd.message.success("success to get the data from system backend!");
+                        this.setState({loading: false, data: res.data});
+                    }
+                }).catch(error => {
+                    antd.message.error("error occurs.", error);
+                })
+            }, 5000);
         }
 
+        // <!--下图<antd>标签等于<></>标签-->
         render() {
-            const {data} = this.state;
+            const {loading, data} = this.state;
             return (
-                <antd.Space>
-                    <antd.Button type="primary" onClick={this.handleClick}>Primary</antd.Button>
+                <antd>
+                    <antd.Button type="dashed" onClick={this.handleClick} danger loading={loading}>加载HTML
+                    </antd.Button>
+                    <antd.Divider type="vertical"/>
                     <div dangerouslySetInnerHTML={{__html: data}}></div>
-                </antd.Space>);
+                </antd>)
+
         }
     }
 
