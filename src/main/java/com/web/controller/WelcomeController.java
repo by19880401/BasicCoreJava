@@ -4,6 +4,7 @@ import com.web.entity.Account;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * 因为templates下可能存放有后台管理的页面资源，当templates对外开放就会产生安全隐患，
  * 所以templates下的资源需要通过ViewResolver(视图解析器)去解析访问
  */
+//@CrossOrigin //解决浏览跨域问题的方法一：给每个controller加@CrossOrigin
 @Slf4j
 @Controller // 不能使用@RestController，否则会以Json格式响应到页面，不会进行视图解析
 public class WelcomeController {
