@@ -17,7 +17,7 @@ import java.io.IOException;
 @Slf4j
 @WebFilter(filterName = "CorsFilter")
 @Configuration
-public class CorsFilter implements Filter {
+public class CORSFilter implements Filter {
 
 
     @Override
