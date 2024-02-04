@@ -1,16 +1,27 @@
 package com.web.entity;
 
-import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-/**
- * @Author ibaiy
- * @Date 2024/1/23 14:45
- **/
-@Data
+import java.util.List;
+
+@lombok.Data
 public class Account {
-    private long id;
-    private String userName;
-    private String role;
-    private int age;
-    private String description;
+    private String country;
+    private String access;// admin,user,guest
+    private String address;
+    private String signature;
+    private int unreadCount;
+    private String avatar;
+    private String title;
+    private String userId;// Primary key
+    @JsonProperty(value = "tags")
+    private List<TagsItem> tags;// tags
+    private int notifyCount;
+    @JsonProperty(value = "geographic")
+    private Geographic geographic;
+    private String phone;
+    private String name;
+    private String email;
+    @JsonProperty(value = "group")
+    private String department;//集团，部门
 }

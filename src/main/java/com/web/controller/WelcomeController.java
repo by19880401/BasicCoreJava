@@ -1,10 +1,9 @@
 package com.web.controller;
 
-import com.web.entity.Account;
+import com.web.entity.AccountInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,14 +20,14 @@ public class WelcomeController {
     public String index(Model model) {
         log.info("Receive a request now.");
         // 假设我们要返回从database中查询出来的用户的信息
-        Account account = new Account();
-        account.setId(1000);
-        account.setUserName("Willis Bai");
-        account.setRole("Admin");
-        account.setAge(35);
-        account.setDescription("这是一个测试页面！！");
+        AccountInfo accountInfo = new AccountInfo();
+        accountInfo.setId(1000);
+        accountInfo.setUserName("Willis Bai");
+        accountInfo.setRole("Admin");
+        accountInfo.setAge(35);
+        accountInfo.setDescription("这是一个测试页面！！");
         // 把用户信息保存在Model对象中
-        model.addAttribute("user", account);
+        model.addAttribute("user", accountInfo);
         return "/welcome";
     }
 }
