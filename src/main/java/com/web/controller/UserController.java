@@ -4,6 +4,7 @@ import com.web.entity.*;
 import com.web.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +15,7 @@ import java.util.List;
 @Slf4j
 @RestController
 public class UserController extends BaseController {
-    @RequestMapping(value = "/currentUser", method = RequestMethod.GET)
+    @RequestMapping(value = {"/currentUser", "/secret/currentUser"}, method = RequestMethod.GET)
     public ResponseEntity<String> findUser() {
         log.info("receive a request from API :: /currentUser");
         APIResponse res = new APIResponse();
@@ -56,5 +57,15 @@ public class UserController extends BaseController {
         log.info("response data :{}", resJsonStr);
         return getResponseEntity(resJsonStr);
 
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseEntity<String> registerUser(@RequestBody String requestStr) {
+        APIResponse res = new APIResponse();
+        log.info("req: {}", requestStr);
+        res.setSuccess(true);
+        String resJsonStr = JsonUtil.toJSONString(res);
+        log.info("response data :{}", resJsonStr);
+        return getResponseEntity(resJsonStr);
     }
 }
