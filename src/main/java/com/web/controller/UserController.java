@@ -4,10 +4,7 @@ import com.web.entity.*;
 import com.web.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,8 +56,45 @@ public class UserController extends BaseController {
 
     }
 
+    /**
+     * 前端使用@RequestBody传递参数至后台
+     * @param requestStr
+     * @return
+     */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<String> registerUser(@RequestBody String requestStr) {
+        APIResponse res = new APIResponse();
+        log.info("req: {}", requestStr);
+        res.setSuccess(true);
+        String resJsonStr = JsonUtil.toJSONString(res);
+        log.info("response data :{}", resJsonStr);
+        return getResponseEntity(resJsonStr);
+    }
+
+    // TODO 未完成
+
+    /**
+     * @RequestParam 注解:
+     * 1.@RequestParam一般与get请求一起使用
+     * 2.一个请求（一个方法中）可以有多个@RequestParam
+     * 3.@RequestParam 用来接收普通参数
+     *
+     * @param requestStr
+     * @return
+     */
+    @RequestMapping(value = "/registerWithRequestParam", method = RequestMethod.GET)
+    public ResponseEntity<String> registerUserWithRequestParam(@RequestParam String requestStr) {
+        APIResponse res = new APIResponse();
+        log.info("req: {}", requestStr);
+        res.setSuccess(true);
+        String resJsonStr = JsonUtil.toJSONString(res);
+        log.info("response data :{}", resJsonStr);
+        return getResponseEntity(resJsonStr);
+    }
+
+    // TODO 未完成
+    @RequestMapping(value = "/registerWithPathVariable", method = RequestMethod.POST)
+    public ResponseEntity<String> registerUserWithPathVariable(@PathVariable String requestStr) {
         APIResponse res = new APIResponse();
         log.info("req: {}", requestStr);
         res.setSuccess(true);
