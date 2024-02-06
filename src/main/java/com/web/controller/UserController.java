@@ -57,12 +57,17 @@ public class UserController extends BaseController {
     }
 
     /**
-     * 前端使用@RequestBody传递参数至后台
      * @param requestStr
      * @return
+     * @RequestBody注解： 1.@RequestBody注解一般与post方法使用
+     * 2.一个请求中只能存在一个@RequestBody注解
+     * 3.@RequestBody 用于接收前端传递给后端的json字符串数据(处理json格式的数据）
+     * 两种格式：(@RequestBody Map map)和(@RequestBody Object object)
+     * 此处是：(@RequestBody Object object)，这里Object是String，完整的json请求，需要使用JsonUtil类进行转化
+     * 即：通过json字符串中的key来匹配对应实体类的属性，如果匹配一致且json中的该key对应的值符合实体类的对应属性的类型要求时,会调用实体类的setter方法将值注入到该属性
      */
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<String> registerUser(@RequestBody String requestStr) {
+    @RequestMapping(value = "/registerWithJsonStr", method = RequestMethod.POST)
+    public ResponseEntity<String> registerUserWithJsonStr(@RequestBody String requestStr) {
         APIResponse res = new APIResponse();
         log.info("req: {}", requestStr);
         res.setSuccess(true);
@@ -71,21 +76,41 @@ public class UserController extends BaseController {
         return getResponseEntity(resJsonStr);
     }
 
-    // TODO 未完成
+    /**
+     *
+     * @param accountInfo 特别注意，这里的accountInfo一定要与前端参数名称相对应，详见前端代码sendReqToBackend08(...)
+     * @return
+     */
+    @RequestMapping(value = "/registerWithObject", method = RequestMethod.POST)
+    public ResponseEntity<String> registerUserWithObj(@RequestBody AccountInfo accountInfo) {
+        APIResponse res = new APIResponse();
+        log.info("req: {}", accountInfo.toString());
+        res.setSuccess(true);
+        String resJsonStr = JsonUtil.toJSONString(res);
+        log.info("response data :{}", resJsonStr);
+        return getResponseEntity(resJsonStr);
+    }
 
     /**
+     * @param userId，必传参数，前端你们传入的参数名称为：uId
+     * @param userName，必传参数，前端你们传入的参数名称为：userName
+     * @param address，必传参数，前端你们传入的参数名称为：address
+     * @param age,                                不添加@RequestParam，该参数在前端可传，也可不传
+     * @return
      * @RequestParam 注解:
      * 1.@RequestParam一般与get请求一起使用
      * 2.一个请求（一个方法中）可以有多个@RequestParam
      * 3.@RequestParam 用来接收普通参数
-     *
-     * @param requestStr
-     * @return
+     * 4.添加@RequestParam时，对应的参数为必传；反之，对应的参数为非必传
+     * 5.@RequestParam中required值默认为true，可以设置为false非必传
+     * 6.通过@RequestParam("userId")或者@RequestParam(value = "userId")指定参数名, 如果不指定（比如：@RequestParam String address或者int age），也能从前端传入，默认的变量名就是参数名（比如：address和age），亲测
+     * 7.通过参数defaultValue = "0"可以指定参数默认值。注意：当为require设置为false时才可以使用defaultValue，亲测，前端没有传isMxEngineer，required = false，如下，它使用了默认值false，但当前端传入isMxEngineer的值时，会接受到前端传入的真实的值
      */
     @RequestMapping(value = "/registerWithRequestParam", method = RequestMethod.GET)
-    public ResponseEntity<String> registerUserWithRequestParam(@RequestParam String requestStr) {
+    public ResponseEntity<String> registerUserWithRequestParam(@RequestParam("uId") int userId, @RequestParam("userName") String userName, @RequestParam String address, int age, @RequestParam(required = false, defaultValue = "false") boolean isMxEngineer) {
         APIResponse res = new APIResponse();
-        log.info("req: {}", requestStr);
+        // 结果：req: [userId: 1001, userName: Yang, address:Xi Fen 3rd Road #251, age:18, isMxEngineer: false]
+        log.info("req: [userId: {}, userName: {}, address:{}, age:{}, isMxEngineer: {}]", userId, userName, address, age, isMxEngineer);
         res.setSuccess(true);
         String resJsonStr = JsonUtil.toJSONString(res);
         log.info("response data :{}", resJsonStr);
