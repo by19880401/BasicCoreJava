@@ -77,7 +77,6 @@ public class UserController extends BaseController {
     }
 
     /**
-     *
      * @param accountInfo 特别注意，这里的accountInfo一定要与前端参数名称相对应，详见前端代码sendReqToBackend08(...)
      * @return
      */
@@ -95,7 +94,7 @@ public class UserController extends BaseController {
      * @param userId，必传参数，前端你们传入的参数名称为：uId
      * @param userName，必传参数，前端你们传入的参数名称为：userName
      * @param address，必传参数，前端你们传入的参数名称为：address
-     * @param age,                                不添加@RequestParam，该参数在前端可传，也可不传
+     * @param age, 不添加@RequestParam，该参数在前端可传，也可不传
      * @return
      * @RequestParam 注解:
      * 1.@RequestParam一般与get请求一起使用
@@ -117,11 +116,18 @@ public class UserController extends BaseController {
         return getResponseEntity(resJsonStr);
     }
 
-    // TODO 未完成
-    @RequestMapping(value = "/registerWithPathVariable", method = RequestMethod.POST)
-    public ResponseEntity<String> registerUserWithPathVariable(@PathVariable String requestStr) {
+    /**
+     * @param userAddress, 方法参数名称和需要绑定的url中变量名称不一致时，在@PathVariable("address")指定名称为address
+     * @param age          方法参数名称和需要绑定的url中变量名称一致时,不用在@PathVariable中指定名称
+     * @return
+     * 1.@PathVariable 映射 URL 绑定的占位符
+     * 2.通过 @PathVariable 可以将 URL 中占位符参数绑定到控制器处理方法的入参中:URL 中的 {xxx}占位符可以通过@PathVariable(“xxx”) 绑定到操作方法的入参中
+     * 3.一般与@RequestMapping(method = RequestMethod.GET)一起使用
+     */
+    @RequestMapping(value = "/registerWithPathVariable/{address}/{age}", method = RequestMethod.GET)
+    public ResponseEntity<String> registerUserWithPathVariable(@PathVariable("address") String userAddress, @PathVariable int age) {
         APIResponse res = new APIResponse();
-        log.info("req: {}", requestStr);
+        log.info("req: {},{}", userAddress, age);
         res.setSuccess(true);
         String resJsonStr = JsonUtil.toJSONString(res);
         log.info("response data :{}", resJsonStr);
