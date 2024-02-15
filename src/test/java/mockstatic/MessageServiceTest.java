@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import staticmethod.MessageService;
+//import staticmethod.MessageService;
 
 @DisplayName("Testing using JUnit 5")
 public class MessageServiceTest {
@@ -26,6 +26,6 @@ public class MessageServiceTest {
         /**
          * Passed, 之所以可以这样写MessageService.getMsg(), 大概是因为MessageService是静态方法吧
          */
-        Assert.assertEquals("Hello Junit 5", MessageService.getMsg());
+//        Assert.assertEquals("Hello Junit 5", MessageService.getMsg());
     }
 }

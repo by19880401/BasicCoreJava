@@ -1,5 +1,6 @@
 package mockprivate;
 
+import com.objectiva.mockprivate.DemoPrivate;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;

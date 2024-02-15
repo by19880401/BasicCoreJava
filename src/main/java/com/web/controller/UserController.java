@@ -57,9 +57,9 @@ public class UserController extends BaseController {
     }
 
     /**
-     * @param requestStr
-     * @return
-     * @RequestBody注解： 1.@RequestBody注解一般与post方法使用
+     * @param requestStr a request as JSON string
+     * @return a response with special code & message
+     * @ RequestBody注解： 1.@RequestBody注解一般与post方法使用
      * 2.一个请求中只能存在一个@RequestBody注解
      * 3.@RequestBody 用于接收前端传递给后端的json字符串数据(处理json格式的数据）
      * 两种格式：(@RequestBody Map map)和(@RequestBody Object object)
@@ -78,7 +78,7 @@ public class UserController extends BaseController {
 
     /**
      * @param accountInfo 特别注意，这里的accountInfo一定要与前端参数名称相对应，详见前端代码sendReqToBackend08(...)
-     * @return
+     * @return a response with error code & message
      */
     @RequestMapping(value = "/registerWithObject", method = RequestMethod.POST)
     public ResponseEntity<String> registerUserWithObj(@RequestBody AccountInfo accountInfo) {
@@ -95,8 +95,8 @@ public class UserController extends BaseController {
      * @param userName，必传参数，前端你们传入的参数名称为：userName
      * @param address，必传参数，前端你们传入的参数名称为：address
      * @param age, 不添加@RequestParam，该参数在前端可传，也可不传
-     * @return
-     * @RequestParam 注解:
+     * @return a response with the code & message
+     * @ RequestParam 注解:
      * 1.@RequestParam一般与get请求一起使用
      * 2.一个请求（一个方法中）可以有多个@RequestParam
      * 3.@RequestParam 用来接收普通参数

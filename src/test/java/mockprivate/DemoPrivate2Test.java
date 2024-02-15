@@ -1,6 +1,7 @@
 package mockprivate;
 
 import cn.hutool.log.StaticLog;
+import com.objectiva.mockprivate.DemoPrivate;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

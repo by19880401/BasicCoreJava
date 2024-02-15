@@ -1,5 +1,6 @@
 package mockito;
 
+import com.objectiva.mockito.Person;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

@@ -1,6 +1,7 @@
 package mockstatic;
 
 import cn.hutool.log.StaticLog;
+import com.objectiva.mockstatic.DemoStatic;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

@@ -1,5 +1,6 @@
 package mockito;
 
+import com.objectiva.mockito.RandomInt;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
