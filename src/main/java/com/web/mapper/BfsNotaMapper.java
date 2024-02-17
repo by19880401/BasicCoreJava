@@ -85,7 +85,7 @@ public interface BfsNotaMapper extends BaseMapper<BfsNota> {
      * @param id
      * @return
      */
-    @Select("select * from bfs_nota_detail where id=#{id}")
+    /*@Select("select * from bfs_nota_detail where id=#{id}")
     @Results(id = "willisTestDetailMap", value = {
             @Result(id = true, column = "id", property = "id"),
             @Result(column = "f_notaunikey", property = "fNotaunikey"),
@@ -101,7 +101,7 @@ public interface BfsNotaMapper extends BaseMapper<BfsNota> {
             @Result(column = "f_couponvalue", property = "fCouponvalue"),
             @Result(column = "f_revision", property = "fRevision")
     })
-    List<BfsNotaDetail> getDetailListById(@Param("id") Integer id);
+    List<BfsNotaDetail> getDetailListById(@Param("id") Integer id);*/
     /***************************************************End****************************************************************/
 
 }

@@ -15,10 +15,10 @@ com.beijingwujian: the demos where I'm working on BJWJ
 # 测试结果
 ## 测试类：com/beijingwujian/JavaLogDemo.java
 ### Mac OS Env测试结果：
-![img.png](img.png)
+![img.png](src/main/resources/static/image/img.png)
 ### Windows Env测试结果：
-![img_1.png](img_1.png)
+![img_1.png](src/main/resources/static/image/img_1.png)
 ## 作为SpringBoot项目运行，访问链接: http://localhost:5050/ ,测试效果如下：
-![img_5.png](img_5.png)
+![img_5.png](src/main/resources/static/image/img_5.png)
 ## 作为SpringBoot项目运行，访问链接：http://localhost:5050/welcome ，测试结果如下：
-![img_4.png](img_4.png)
+![img_4.png](src/main/resources/static/image/img_4.png)
