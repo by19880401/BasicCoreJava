@@ -68,7 +68,8 @@ public interface BfsNotaMapper extends BaseMapper<BfsNota> {
             @Result(column = "f_qr_cdrivercode", property = "fQrCdrivercode"),
             @Result(column = "f_qr_fdatetime", property = "fQrFdatetime"),
             @Result(column = "f_qr_randomnum", property = "fQrRandomnum"),
-            @Result(property = "details", many = @Many(resultMap = "willisTestDetailMap", columnPrefix = "s_"))  // <2>不同之处在这里
+//            @Result(property = "details", many = @Many(resultMap = "willisTestDetailMap", columnPrefix = "s_"))  // <2>willisTestDetailMap同在一个Mapper中时
+            @Result(property = "details", many = @Many(resultMap = "com.web.mapper.BfsNotaDetailMapper.willisTestDetailMap", columnPrefix = "s_"))  // <3>willisTestDetailMap不在同一个Mapper中时
     })
     List<BfsNota> findListWithHighPerformance(@Param("idNum") Integer idNumAsParam);
 
@@ -80,7 +81,8 @@ public interface BfsNotaMapper extends BaseMapper<BfsNota> {
      * 事实上，getDetailListById这个方法并没有被真的调用，甚至上面 Select 注解中的 SQL 语句也不会被执行。定义这个方法只是因为 @Results 注解必需要依存于一个方法，换句话来说，这个方法只是占位符而已。
      * columnPrefix, 会为 willisTestDetailMap 中的所有列名都加上一个 s_ 前缀，这样一来就能匹配上联合查询 SQL语句中实际返回的列名（例如 s_id）了
      *
-     * TODO 重要：经过测试，上面的 Mapper 完美地完成了任务。值得一提的是，引用的ResultMap不一定要定义在同一个 Mapper中，也可以用全限定名去引用 Mapper 外部的 ResultMap
+     * KEYPOINT 重要：经过测试，上面的 Mapper 完美地完成了任务。值得一提的是，引用的ResultMap不一定要定义在同一个 Mapper中（如上述<2>），
+     * KEYPOINT 当然，也可以用全限定名去引用Mapper外部的ResultMap(如上述<3>，当前使用的方式)
      *
      * @param id
      * @return
