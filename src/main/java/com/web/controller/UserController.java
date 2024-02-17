@@ -27,7 +27,7 @@ public class UserController extends BaseController {
         List<TagsItem> tags = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             TagsItem tag = new TagsItem();
-            tag.setKey(String.valueOf(i));
+            tag.setTagId(String.valueOf(i));
             tag.setLabel("很有想法的");
             tags.add(tag);
         }
@@ -54,6 +54,16 @@ public class UserController extends BaseController {
         log.info("response data :{}", resJsonStr);
         return getResponseEntity(resJsonStr);
 
+    }
+
+    @RequestMapping(value = {"/currentUserReal"}, method = RequestMethod.GET)
+    public ResponseEntity<String> findUserFromDatabase() {
+        log.info("receive a request from API :: /currentUser");
+        APIResponse res = new APIResponse();
+        res.setSuccess(true);
+        String resJsonStr = JsonUtil.toJSONString(res);
+        log.info("response data :{}", resJsonStr);
+        return getResponseEntity(resJsonStr);
     }
 
     /**
