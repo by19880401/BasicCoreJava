@@ -29,7 +29,6 @@ public class Account implements Serializable {
     @TableField("user_id")
     private String userId;// Primary key
     @JsonProperty(value = "tags")
-//    @TableField("tag_id")
     private List<TagsItem> tags;// tags
     @TableField("notify_count")
     private int notifyCount;
