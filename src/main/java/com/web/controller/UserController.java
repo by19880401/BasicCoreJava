@@ -1,9 +1,12 @@
 package com.web.controller;
 
 import com.web.entity.*;
+import com.web.mapper.AccountMapper;
 import com.web.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,6 +15,14 @@ import java.util.List;
 @Slf4j
 @RestController
 public class UserController extends BaseController {
+
+    private AccountMapper accountMapper;
+
+    @Autowired
+    public void setAccountMapper(AccountMapper accountMapper) {
+        this.accountMapper = accountMapper;
+    }
+
     @RequestMapping(value = {"/currentUser", "/secret/currentUser"}, method = RequestMethod.GET)
     public ResponseEntity<String> findUser() {
         log.info("receive a request from API :: /currentUser");
@@ -56,11 +67,19 @@ public class UserController extends BaseController {
 
     }
 
-    @RequestMapping(value = {"/currentUserReal"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/currentUserFromDb"}, method = RequestMethod.GET)
     public ResponseEntity<String> findUserFromDatabase() {
         log.info("receive a request from API :: /currentUser");
         APIResponse res = new APIResponse();
         res.setSuccess(true);
+        List<Account> accountList = accountMapper.findAccounts();
+        if (CollectionUtils.isEmpty(accountList)) {
+            String resJsonStr = JsonUtil.toJSONString(res);
+            log.info("No account found.");
+            return getResponseEntity(resJsonStr);
+        }
+        Account account = accountList.get(0);
+        res.setData(account);
         String resJsonStr = JsonUtil.toJSONString(res);
         log.info("response data :{}", resJsonStr);
         return getResponseEntity(resJsonStr);
@@ -104,7 +123,7 @@ public class UserController extends BaseController {
      * @param userId，必传参数，前端你们传入的参数名称为：uId
      * @param userName，必传参数，前端你们传入的参数名称为：userName
      * @param address，必传参数，前端你们传入的参数名称为：address
-     * @param age, 不添加@RequestParam，该参数在前端可传，也可不传
+     * @param age,                                不添加@RequestParam，该参数在前端可传，也可不传
      * @return a response with the code & message
      * @ RequestParam 注解:
      * 1.@RequestParam一般与get请求一起使用
@@ -129,8 +148,7 @@ public class UserController extends BaseController {
     /**
      * @param userAddress, 方法参数名称和需要绑定的url中变量名称不一致时，在@PathVariable("address")指定名称为address
      * @param age          方法参数名称和需要绑定的url中变量名称一致时,不用在@PathVariable中指定名称
-     * @return
-     * 1.@PathVariable 映射 URL 绑定的占位符
+     * @return 1.@PathVariable 映射 URL 绑定的占位符
      * 2.通过 @PathVariable 可以将 URL 中占位符参数绑定到控制器处理方法的入参中:URL 中的 {xxx}占位符可以通过@PathVariable(“xxx”) 绑定到操作方法的入参中
      * 3.一般与@RequestMapping(method = RequestMethod.GET)一起使用
      */

@@ -16,8 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @TableName(value = "basic_core_java_account")
 public class Account implements Serializable {
-    @TableId(type = IdType.AUTO)
-    private long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     private String country;
     private String access;// admin,user,guest
     private String address;
@@ -29,7 +29,7 @@ public class Account implements Serializable {
     @TableField("user_id")
     private String userId;// Primary key
     @JsonProperty(value = "tags")
-    @TableField("tag_id")
+//    @TableField("tag_id")
     private List<TagsItem> tags;// tags
     @TableField("notify_count")
     private int notifyCount;
