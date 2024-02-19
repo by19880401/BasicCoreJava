@@ -67,9 +67,16 @@ public class UserController extends BaseController {
 
     }
 
+    /**
+     * 集成mybatis-plus，实现从db中一对多查询数据
+     * 【不推荐mybatis-plus】、【不友好】、【很费劲】、【逻辑非常乱】
+     * 大神们 推荐 【Spring Data JPA】
+     *
+     * @return 正常的response
+     */
     @RequestMapping(value = {"/currentUserFromDb"}, method = RequestMethod.GET)
     public ResponseEntity<String> findUserFromDatabase() {
-        log.info("receive a request from API :: /currentUser");
+        log.info("receive a request from API :: /currentUserFromDb");
         APIResponse res = new APIResponse();
         res.setSuccess(true);
         List<Account> accountList = accountMapper.findAccounts();

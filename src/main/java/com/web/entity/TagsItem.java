@@ -24,5 +24,5 @@ public class TagsItem implements Serializable {
     private String label;
     @JsonProperty(value = "key")
     @TableField("f_tag_id")
-    private String tagId;//外建 TODO don't know why there is no value
+    private String tagId;//外键 TODO don't know why there is no value
 }

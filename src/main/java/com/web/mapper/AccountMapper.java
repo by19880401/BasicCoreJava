@@ -22,7 +22,7 @@ public interface AccountMapper extends BaseMapper<Account> {
             "left join tags_item item on\n" +
             "       bcja.tag_id = item.f_tag_id\n" +
             "where\n" +
-            "       bcja.id = 1;")
+            "       bcja.id = 1")
     @Results({
             @Result(property = "id", column = "id", id = true),
             @Result(column = "user_id", property = "userId"),
@@ -38,7 +38,7 @@ public interface AccountMapper extends BaseMapper<Account> {
             @Result(column = "name", property = "name"),
             @Result(column = "email", property = "email"),
             @Result(column = "department", property = "department"),
-            @Result(property = "tags", many = @Many(resultMap = "com.web.mapper.TagItemMapper.tagItemResultMap", columnPrefix = "item_"))
+            @Result(property = "tags", column = "tag_id", many = @Many(resultMap = "com.web.mapper.TagItemMapper.tagItemResultMap", columnPrefix = "item_"))
     })
     List<Account> findAccounts();
 }

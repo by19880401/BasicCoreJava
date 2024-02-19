@@ -17,7 +17,7 @@ public interface TagItemMapper extends BaseMapper<TagsItem> {
     @Results(id = "tagItemResultMap", value = {
             @Result(id = true, column = "id", property = "id"),
             @Result(column = "label", property = "label"),
-            @Result(column = "ftag_id", property = "tagId")
+            @Result(column = "f_tag_id", property = "tagId")
     })
     List<TagsItem> getDetailListById(@Param("id") Long id);
 }
