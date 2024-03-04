@@ -18,7 +18,7 @@ public class GetRank {
     }
 
 
-    // 0.39=0.4, 0.52=0.5
+    // 0.39约等于0.4, 0.52约等于0.5
     private static List<HealthTable> initList() {
         List<HealthTable> resultList = Lists.newArrayList();
         resultList.add(new HealthTable("分销商1", 0.1, ""));
