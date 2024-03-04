@@ -18,6 +18,7 @@ public class GetRank {
     }
 
 
+    // 0.39=0.4, 0.52=0.5
     private static List<HealthTable> initList() {
         List<HealthTable> resultList = Lists.newArrayList();
         resultList.add(new HealthTable("分销商1", 0.1, ""));
@@ -30,6 +31,10 @@ public class GetRank {
         resultList.add(new HealthTable("分销商8", 0.56, ""));
         resultList.add(new HealthTable("分销商9", 0.11, ""));
         resultList.add(new HealthTable("分销商10", 0.99, ""));
+        resultList.add(new HealthTable("分销商11", 0.99, ""));
+        resultList.add(new HealthTable("分销商12", 0.99, ""));
+        resultList.add(new HealthTable("分销商13", 0.99, ""));
+        resultList.add(new HealthTable("分销商14", 0.99, ""));
         return resultList;
     }
 
